@@ -111,6 +111,40 @@
   --color-warning-800: #93370d;
   --color-warning-900: #7a2e0e;
 
+  /* ---------- Chip tipe ruangan (palet Ant Design yang dipakai di Figma) ---------- */
+  --color-room-meeting-bg: #fff0f6;
+  --color-room-meeting-fg: #9e1068;
+  --color-room-office-bg: #e6f7ff;
+  --color-room-office-fg: #0050b3;
+  --color-room-coworking-bg: #fcffe6;
+  --color-room-coworking-fg: #5b8c00;
+  --color-room-coworking-shared-bg: #f6ffed;
+  --color-room-coworking-shared-fg: #237804;
+  --color-room-board-bg: #fff2e8;
+  --color-room-board-fg: #ad2102;
+  --color-room-class-bg: #fffbe6;
+  --color-room-class-fg: #ad6800;
+  --color-room-seminar-bg: #f0f5ff;
+  --color-room-seminar-fg: #061178;
+  --color-room-theatre-bg: #e6fffb;
+  --color-room-theatre-fg: #006d75;
+  --color-room-combined-bg: #f9f0ff;
+  --color-room-combined-fg: #391085;
+
+  /* ---------- Chip status lain-lain ---------- */
+  --color-status-canceled-bg: #feffe6;
+  --color-status-canceled-fg: #876800;
+  --color-status-superadmin-bg: #e6f7ff;
+  --color-status-superadmin-fg: #0050b3;
+
+  /* ---------- Shadow ---------- */
+  --shadow-nav: 0 -2px 20px 0 rgb(57 57 57 / 0.2);
+  --shadow-navbar: 0 2px 20px 0 rgb(57 57 57 / 0.1);
+  --shadow-popover: 0 10px 20px 0 rgb(57 57 57 / 0.2);
+  --shadow-modal:
+    0 8px 8px -4px rgb(16 24 40 / 0.03), 0 20px 24px -4px rgb(16 24 40 / 0.08);
+  --shadow-input: 0 1px 2px 0 rgb(16 24 40 / 0.04);
+
   /* ---------- Semantic shortcuts ---------- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
