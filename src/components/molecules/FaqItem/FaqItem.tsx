@@ -23,7 +23,7 @@ export function FaqItem({ question, answer, open, onToggle, className }: FaqItem
         aria-expanded={open}
         aria-controls={panelId}
         onClick={onToggle}
-        className="flex w-full items-center justify-between gap-4 py-4 text-left outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
+        className="flex w-full cursor-pointer items-center justify-between gap-4 py-4 text-left outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
       >
         <span className="text-caption font-medium text-neutral-950 md:text-body">{question}</span>
         <Icon

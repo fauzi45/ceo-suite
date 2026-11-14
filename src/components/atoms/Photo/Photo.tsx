@@ -9,6 +9,8 @@ export interface PhotoProps {
   priority?: boolean;
   /** Atribut `sizes` untuk next/image. */
   sizes?: string;
+  /** Foto membesar pelan saat kartu induk (yang memakai class `group`) di-hover. */
+  hoverZoom?: boolean;
   className?: string;
 }
 
@@ -16,7 +18,7 @@ export interface PhotoProps {
  * Area foto yang mengisi wadahnya (beri tinggi/aspect lewat `className`).
  * Belum ada foto dari Figma, jadi placeholder dipakai sampai `src` diisi.
  */
-export function Photo({ src, alt = "", priority, sizes = "100vw", className }: PhotoProps) {
+export function Photo({ src, alt = "", priority, sizes = "100vw", hoverZoom, className }: PhotoProps) {
   return (
     <div
       className={cn(
@@ -34,7 +36,10 @@ export function Photo({ src, alt = "", priority, sizes = "100vw", className }: P
           priority={priority}
           sizes={sizes}
           unoptimized
-          className="object-cover"
+          className={cn(
+            "object-cover",
+            hoverZoom && "transition-transform duration-500 ease-out group-hover:scale-105",
+          )}
         />
       ) : (
         <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center text-neutral-300">

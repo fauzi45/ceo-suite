@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { Logo } from "@/components/atoms/Logo/Logo";
 import { Button } from "@/components/atoms/Button/Button";
@@ -61,7 +62,9 @@ export function Navbar({
   return (
     <header className={cn("relative w-full bg-white shadow-navbar", className)}>
       <div className="flex items-center justify-between gap-4 px-4 py-4 sm:px-8 xl:px-40 xl:py-8">
-        <Logo height={32} />
+        <Link href="/" aria-label="CEO Suite, ke halaman utama" className="cursor-pointer">
+          <Logo height={32} />
+        </Link>
 
         <nav aria-label="Navigasi utama" className="hidden items-center gap-8 xl:flex">
           {links.map((link) => {

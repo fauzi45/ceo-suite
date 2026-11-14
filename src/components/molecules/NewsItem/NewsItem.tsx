@@ -10,16 +10,17 @@ export interface NewsItemProps {
 /** Artikel di daftar berita: foto kecil di kiri, meta + judul + kutipan di kanan. */
 export function NewsItem({ article, className }: NewsItemProps) {
   return (
-    <article className={cn("flex gap-4", className)}>
+    <article className={cn("group flex cursor-pointer gap-4", className)}>
       <Photo
         src={article.image}
         alt=""
-        sizes="(min-width: 640px) 176px, 112px"
-        className="aspect-[312/200] w-32 shrink-0 rounded-md sm:w-52 lg:w-60"
+        sizes="(min-width: 1536px) 312px, (min-width: 640px) 240px, 128px"
+        hoverZoom
+        className="aspect-[312/200] w-32 shrink-0 rounded-md sm:w-52 lg:w-60 2xl:w-[312px]"
       />
       <div className="flex min-w-0 flex-col gap-1">
         <span className="text-tiny text-neutral-400">{article.meta}</span>
-        <h3 className="text-body font-bold leading-[1.2] text-neutral-950 md:text-heading-sm">
+        <h3 className="text-body font-bold leading-[1.2] text-neutral-950 transition-colors group-hover:text-primary-800 md:text-heading-sm">
           {article.title}
         </h3>
         <p className="line-clamp-2 text-tiny text-neutral-500 md:text-caption">{article.excerpt}</p>

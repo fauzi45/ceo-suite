@@ -24,8 +24,8 @@ export function NewsSection({
     <section className={cn("py-10 md:py-16", className)}>
       <Container className="flex flex-col gap-6 md:gap-8">
         <SectionHeader title="News, events and insights for you" />
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
-          <div className="flex flex-col gap-5">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-10">
+          <div className="flex flex-col gap-5 lg:justify-between">
             {articles.map((article) => (
               <div key={article.id} className="border-b border-neutral-100 pb-5">
                 <NewsItem article={article} />
@@ -37,11 +37,12 @@ export function NewsSection({
           </div>
 
           {/* Rasio kartu = rasio foto asli dari Figma (760x812) supaya foto tidak terpotong/melar. */}
-          <article className="relative aspect-[760/812] overflow-hidden rounded-lg lg:self-start">
+          <article className="group relative aspect-[760/812] cursor-pointer overflow-hidden rounded-lg transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-popover">
             <Photo
               src={featuredImage}
               alt=""
               sizes="(min-width: 1024px) 50vw, 100vw"
+              hoverZoom
               className="absolute inset-0 size-full"
             />
             {/* Foto aslinya terang; di Figma ditutup lapisan gelap agar teks putih terbaca. */}

@@ -11,12 +11,17 @@ export interface PromoCardProps {
 export function PromoCard({ promo, className }: PromoCardProps) {
   return (
     <article
-      className={cn("flex flex-col overflow-hidden rounded-lg bg-white ring-1 ring-neutral-100", className)}
+      className={cn(
+        "flex flex-col overflow-hidden rounded-lg bg-white ring-1 ring-neutral-100",
+        "group cursor-pointer transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-popover",
+        className,
+      )}
     >
       <Photo
         src={promo.image}
         alt={promo.title}
         sizes="(min-width: 768px) 33vw, 90vw"
+        hoverZoom
         className="aspect-[9/4]"
       />
       <div className="flex flex-col gap-1 p-4">

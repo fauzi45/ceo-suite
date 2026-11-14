@@ -210,6 +210,11 @@ Warna logo partner di Figma: `#B0B0B0` (neutral-300) dan `#888888` (neutral-400)
 - Heading section memakai border-bottom 1px `grey/500` (#6D6D6D), padding 32px.
 - Spacing yang muncul di layout palet: padding 32px, gap 32px / 24px / 12px.
 
+### Interaksi (bukan dari Figma)
+
+- Semua elemen yang bisa diklik (`button`, `a[href]`, `label[for]`, `[role=button]`) memakai `cursor: pointer` lewat `@layer base` di `globals.css`, karena Tailwind v4 tidak lagi memberinya secara default.
+- Kartu landing page (RoomCard, PromoCard, DealCard, PartnerCard, NewsItem, SpaceCategoryCard, AllSpaceCard, kartu berita unggulan) punya efek hover: naik 4px (`hover:-translate-y-1`), bayangan `shadow-popover` untuk kartu berlatar, foto membesar 5% (`Photo hoverZoom`), dan judul berubah ke `primary-800` untuk kartu tanpa latar.
+
 ### Icon tambahan landing page
 
 Tidak ada di file Figma sebagai layer Iconify; dipilih sebagai padanan visual (Iconify `mdi:*`).

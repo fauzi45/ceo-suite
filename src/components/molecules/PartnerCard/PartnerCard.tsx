@@ -13,15 +13,16 @@ export interface PartnerCardProps {
  */
 export function PartnerCard({ partner, className }: PartnerCardProps) {
   return (
-    <article className={cn("flex flex-col gap-4", className)}>
+    <article className={cn("group flex cursor-pointer flex-col gap-4", className)}>
       <Photo
         src={partner.image}
         alt={partner.title}
         sizes="(min-width: 768px) 33vw, 90vw"
+        hoverZoom
         className="aspect-[7/4] rounded-lg"
       />
       <div className="flex flex-col gap-2">
-        <h3 className="text-body font-bold leading-[1.2] text-neutral-950 md:text-heading-sm">
+        <h3 className="text-body font-bold leading-[1.2] text-neutral-950 transition-colors group-hover:text-primary-800 md:text-heading-sm">
           {partner.title}
         </h3>
         <p className="text-caption text-neutral-500 md:text-body">{partner.description}</p>

@@ -16,6 +16,7 @@ export function AllSpaceCard({ onClick, className }: AllSpaceCardProps) {
     <article
       className={cn(
         "relative flex h-full min-h-56 flex-col overflow-hidden rounded-md bg-primary-800 text-white shadow-modal",
+        "transition-transform duration-300 hover:-translate-y-1",
         className,
       )}
     >

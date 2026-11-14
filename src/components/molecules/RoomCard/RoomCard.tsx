@@ -14,6 +14,7 @@ export function RoomCard({ room, className }: RoomCardProps) {
     <article
       className={cn(
         "flex flex-col gap-3 rounded-lg bg-white p-3 shadow-input ring-1 ring-neutral-100",
+        "group cursor-pointer transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-popover",
         className,
       )}
     >
@@ -21,6 +22,7 @@ export function RoomCard({ room, className }: RoomCardProps) {
         src={room.image}
         alt={room.name}
         sizes="(min-width: 1280px) 20vw, (min-width: 640px) 45vw, 90vw"
+        hoverZoom
         className="aspect-[356/192] rounded-md"
       />
       <div className="flex flex-col gap-2">
