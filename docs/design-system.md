@@ -209,3 +209,43 @@ Warna logo partner di Figma: `#B0B0B0` (neutral-300) dan `#888888` (neutral-400)
 - Tag "Design System" di kanvas memakai `product color/200` (#F5D3D3) sebagai fill, border 6px, radius 100px.
 - Heading section memakai border-bottom 1px `grey/500` (#6D6D6D), padding 32px.
 - Spacing yang muncul di layout palet: padding 32px, gap 32px / 24px / 12px.
+
+### Icon tambahan landing page
+
+Tidak ada di file Figma sebagai layer Iconify; dipilih sebagai padanan visual (Iconify `mdi:*`).
+
+| File (`public/icons/`) | Iconify id | Dipakai untuk |
+| --- | --- | --- |
+| map-pin.svg | mdi:map-marker | Field lokasi |
+| filter.svg | mdi:filter-variant | Tombol Filter |
+| chat.svg | mdi:chat-processing-outline | Tombol Contact Us |
+| city.svg | mdi:city-variant-outline | Statistik kota |
+| pin-radius.svg | mdi:map-marker-radius-outline | Statistik lokasi |
+| briefcase.svg | mdi:briefcase-outline | Statistik tahun |
+| office-building.svg | mdi:office-building-outline | Statistik gedung |
+| handshake.svg | mdi:handshake-outline | Statistik bisnis |
+| apple.svg | mdi:apple | Badge App Store |
+| google-play.svg | mdi:google-play | Badge Google Play |
+| menu.svg | mdi:menu | Tombol hamburger di navbar mobile |
+
+## Foto landing page
+
+Foto di `public/images/landing/*.jpg` dipotong dari ekspor PNG 1x frame "landing page - not logged in"
+(Figma › page Web › Landing Page | Phase 2 Design). Foto yang di Figma memuat overlay (panah merah, teks voucher,
+teks berita utama) dipotong pada bagian yang bersih. Foto partner memuat watermark "CEO SUITE x partner" dari Figma.
+Pemetaan nama file ke komponen ada di `src/data/landing.ts`. Jika Figma punya foto asli beresolusi lebih tinggi,
+cukup timpa file dengan nama yang sama.
+
+## Aset section "Download the CEO SUITE App Now!"
+
+Diekspor dari Figma (Frame 1618872607) sebagai PNG transparan ke `public/images/app/`:
+
+| File | Layer Figma | Skala | Keterangan |
+| --- | --- | --- | --- |
+| app-phones.png | 2x `Devices / Apple / iPhone 11 Pro` | 2x, digabung dan dikecilkan ke 1,5x | Dua ponsel dengan bayangan; menempel di tepi atas/bawah section |
+| shape-left.png | `Vector` | 1x | Bentuk vektor di kiri-bawah |
+| shape-right.png | `Vector` (kedua) | 1x | Bentuk vektor di kanan-atas |
+| badge-app-store.png | `App Store Black` | 3x | Badge resmi |
+| badge-google-play.png | `Google Play Black` | 3x | Badge resmi |
+
+Layer `Ellipse 1577` (lingkaran blur) tidak diekspor karena hasil PNG-nya berartefak; efeknya ditiru dengan gradasi CSS.

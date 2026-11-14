@@ -50,7 +50,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
         <span
           aria-hidden
           className={cn(
-            "pointer-events-none rounded-full bg-primary-800 opacity-0 transition-opacity peer-checked:opacity-100 peer-disabled:bg-neutral-300",
+            "pointer-events-none relative rounded-full bg-primary-800 opacity-0 transition-opacity peer-checked:opacity-100 peer-disabled:bg-neutral-300",
             dotSize[size],
           )}
         />

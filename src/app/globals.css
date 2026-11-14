@@ -159,3 +159,17 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+/* Strip logo berjalan ke kanan. Track berisi dua salinan daftar, jadi geser -50% -> 0 tampak tanpa putus. */
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@utility animate-marquee-right {
+  animation: marquee-right 40s linear infinite;
+}

@@ -1,0 +1,65 @@
+import { cn } from "@/lib/cn";
+import { Button, type ButtonHierarchy } from "@/components/atoms/Button/Button";
+import { Icon, type IconName } from "@/components/atoms/Icon/Icon";
+
+export interface SectionHeaderProps {
+  title: string;
+  subtitle?: string;
+  /** Icon bulat merah muda di kiri judul (Promotions, Best Deals). */
+  icon?: IconName;
+  /** Teks tombol di kanan (mis. "See All"). Tombol hanya tampil jika diisi. */
+  actionLabel?: string;
+  /** Icon di kiri teks tombol (mis. "filter"). */
+  actionIcon?: IconName;
+  /** Gaya tombol aksi. Default `secondary-filled` (See All); Filter memakai `secondary-white`. */
+  actionHierarchy?: ButtonHierarchy;
+  onAction?: () => void;
+  className?: string;
+}
+
+/** Judul section + subjudul, dengan tombol aksi opsional (turun ke bawah di mobile). */
+export function SectionHeader({
+  title,
+  subtitle,
+  icon,
+  actionLabel,
+  actionIcon,
+  actionHierarchy = "secondary-filled",
+  onAction,
+  className,
+}: SectionHeaderProps) {
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between",
+        className,
+      )}
+    >
+      <div className="flex flex-col gap-2">
+        <h2 className="flex items-center gap-3 text-heading-md font-bold leading-[1.2] text-neutral-950 md:text-heading-lg">
+          {icon && (
+            <span
+              aria-hidden="true"
+              className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-600"
+            >
+              <Icon name={icon} size={18} />
+            </span>
+          )}
+          {title}
+        </h2>
+        {subtitle && <p className="text-caption text-neutral-500 md:text-body">{subtitle}</p>}
+      </div>
+      {actionLabel && (
+        <Button
+          hierarchy={actionHierarchy}
+          size="mobile"
+          iconLeft={actionIcon}
+          onClick={onAction}
+          className="self-start"
+        >
+          {actionLabel}
+        </Button>
+      )}
+    </div>
+  );
+}
