@@ -22,6 +22,7 @@ export const ICON_NAMES = [
   "checklist",
   "checklist-fill",
   "eye",
+  "eye-off",
   "download",
   "check",
   "check-small",

@@ -160,6 +160,7 @@ SVG memakai `currentColor`, jadi warnanya ikut `color` elemen pembungkus.
 | checklist.svg | Icons/mage:checklist-note | mage:checklist-note |
 | checklist-fill.svg | Icons/mage:checklist-note-fill | mage:checklist-note-fill |
 | eye.svg | Icons/mdi:eye-outline | mdi:eye-outline |
+| eye-off.svg | tidak ada di Figma (padanan toggle password) | mdi:eye-off-outline |
 | download.svg | Icons/Arrow-Down-2--Streamline-Core.svg | streamline:arrow-down-2 |
 | check.svg | Icons/ic:round-check | ic:round-check |
 | grid.svg | Icons/ep:menu | ep:menu |

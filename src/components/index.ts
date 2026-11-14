@@ -18,9 +18,21 @@ export {
 export { Input, type InputProps } from "./atoms/Input/Input";
 export { Icon, ICON_NAMES, type IconName, type IconProps } from "./atoms/Icon/Icon";
 export { Logo, type LogoProps } from "./atoms/Logo/Logo";
+export { TextLink, type TextLinkProps } from "./atoms/TextLink/TextLink";
+export { OtpDigit, type OtpDigitProps } from "./atoms/OtpDigit/OtpDigit";
+export { SuccessBadge, type SuccessBadgeProps } from "./atoms/SuccessBadge/SuccessBadge";
 
 // Molecules
+export { AuthHeader, type AuthHeaderProps } from "./molecules/AuthHeader/AuthHeader";
+export { OtpField, type OtpFieldProps } from "./molecules/OtpField/OtpField";
+export {
+  PasswordRules,
+  type PasswordRule,
+  type PasswordRulesProps,
+} from "./molecules/PasswordRules/PasswordRules";
+export { ResendCode, type ResendCodeProps } from "./molecules/ResendCode/ResendCode";
 export { FormField, type FormFieldProps } from "./molecules/FormField/FormField";
+export { PasswordField, type PasswordFieldProps } from "./molecules/PasswordField/PasswordField";
 export {
   SidebarNavItem,
   SidebarSubItem,
@@ -36,7 +48,26 @@ export {
 } from "./molecules/DropdownMenu/DropdownMenu";
 export { EmailCapture, type EmailCaptureProps } from "./molecules/EmailCapture/EmailCapture";
 
+// Templates
+export { AuthLayout, type AuthLayoutProps } from "./templates/AuthLayout/AuthLayout";
+
 // Organisms
+export { LoginForm, type LoginFormProps } from "./organisms/LoginForm/LoginForm";
+export { SignUpForm, type SignUpFormProps } from "./organisms/SignUpForm/SignUpForm";
+export { SuccessModal, type SuccessModalProps } from "./organisms/SuccessModal/SuccessModal";
+export {
+  ForgotPasswordForm,
+  type ForgotPasswordFormProps,
+} from "./organisms/ForgotPasswordForm/ForgotPasswordForm";
+export {
+  ResetPasswordForm,
+  type ResetPasswordFormProps,
+} from "./organisms/ResetPasswordForm/ResetPasswordForm";
+export { IdentityModal, type IdentityModalProps } from "./organisms/IdentityModal/IdentityModal";
+export {
+  VerifyEmailForm,
+  type VerifyEmailFormProps,
+} from "./organisms/VerifyEmailForm/VerifyEmailForm";
 export { Modal, type ModalProps } from "./organisms/Modal/Modal";
 export {
   Sidebar,

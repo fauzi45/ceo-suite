@@ -35,6 +35,12 @@ export const FormField = forwardRef<HTMLInputElement, FormFieldProps>(function F
           )}
         >
           {label}
+          {inputProps.required && (
+            <span aria-hidden="true" className="text-error-500">
+              {" "}
+              *
+            </span>
+          )}
         </label>
       )}
       <Input
