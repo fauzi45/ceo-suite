@@ -18,21 +18,15 @@ export interface LoginFormProps {
 
 const simulateLogin = () => new Promise<void>((resolve) => setTimeout(resolve, 800));
 
-const required = (
-  <span aria-hidden="true" className="text-error-500">
-    {" "}
-    *
-  </span>
-);
-
 /** Form login: email, password, remember me, forgot password, Sign In, dan tautan Sign Up. */
 export function LoginForm({ onSubmit, className }: LoginFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
+    mode: "onTouched",
     defaultValues: { email: "", password: "", rememberMe: false },
   });
 
@@ -58,7 +52,7 @@ export function LoginForm({ onSubmit, className }: LoginFormProps) {
           inputSize="lg"
           className="gap-2"
           required
-          label={<>Email{required}</>}
+          label="Email"
           type="email"
           autoComplete="email"
           placeholder="you@example.com"
@@ -69,7 +63,7 @@ export function LoginForm({ onSubmit, className }: LoginFormProps) {
           inputSize="lg"
           className="gap-2"
           required
-          label={<>Password{required}</>}
+          label="Password"
           autoComplete="current-password"
           placeholder="Enter your password"
           errorText={errors.password?.message}
@@ -84,7 +78,7 @@ export function LoginForm({ onSubmit, className }: LoginFormProps) {
 
       <Button
         type="submit"
-        disabled={isSubmitting}
+        disabled={!isValid || isSubmitting}
         iconLeft={isSubmitting ? "loading" : undefined}
         className="mt-12 w-full md:mt-16 md:w-77 md:self-center"
       >

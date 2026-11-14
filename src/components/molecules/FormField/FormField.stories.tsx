@@ -20,6 +20,8 @@ export const Default: Story = {};
 export const Filled: Story = { args: { defaultValue: "Input" } };
 export const Error: Story = { args: { errorText: "Helper text", defaultValue: "Input" } };
 export const Disabled: Story = { args: { disabled: true } };
+/** Field wajib: tanda `*` merah di label (disembunyikan dari screen reader, input `required`). */
+export const Required: Story = { args: { required: true } };
 
 /** Semua state "Input / Box" di Figma: default, filled, error, disabled. */
 export const Matrix: Story = {

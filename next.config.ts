@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Hostname selain localhost yang boleh mengakses dev server (hanya hostname, tanpa http:// dan port).
+  allowedDevOrigins: ["localhost.com"],
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

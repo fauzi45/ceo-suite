@@ -26,3 +26,13 @@ export const Default: Story = {
 };
 
 export const WithoutSubtitle: Story = { args: { subtitle: undefined } };
+
+/** Layar verifikasi email: judul lebih kecil dan jarak logo ke judul lebih lebar. */
+export const Verification: Story = {
+  args: {
+    title: "Email Verification",
+    subtitle: "We have sent a verification code to janedoe@gmail.com",
+    titleSize: "md",
+    spacing: "wide",
+  },
+};

@@ -27,12 +27,11 @@ export const RequiredFields: Story = {
   },
 };
 
-export const EmptySubmit: Story = {
+/** Sign In nonaktif selama form belum terisi valid. */
+export const DisabledWhenEmpty: Story = {
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole("button", { name: "Sign In" }));
-    await expect(await canvas.findByText("Email is required")).toBeVisible();
-    await expect(canvas.getByText("Password is required")).toBeVisible();
+    await expect(canvas.getByRole("button", { name: "Sign In" })).toBeDisabled();
     await expect(args.onSubmit).not.toHaveBeenCalled();
   },
 };
@@ -42,8 +41,8 @@ export const InvalidEmail: Story = {
     const canvas = within(canvasElement);
     await userEvent.type(canvas.getByLabelText(/^Email/), "a@b");
     await userEvent.type(canvas.getByLabelText(/^Password/), "secret");
-    await userEvent.click(canvas.getByRole("button", { name: "Sign In" }));
     await expect(await canvas.findByText("Enter a valid email address")).toBeVisible();
+    await expect(canvas.getByRole("button", { name: "Sign In" })).toBeDisabled();
     await expect(args.onSubmit).not.toHaveBeenCalled();
   },
 };
