@@ -137,6 +137,10 @@
   --color-status-superadmin-bg: #e6f7ff;
   --color-status-superadmin-fg: #0050b3;
 
+  /* ---------- Focus input (Figma: "Primary/300" dan "Focus ring/4px - Primary 100") ---------- */
+  --color-focus-border: #a5b4fc;
+  --color-focus-ring: #e1e1fe;
+
   /* ---------- Shadow ---------- */
   --shadow-nav: 0 -2px 20px 0 rgb(57 57 57 / 0.2);
   --shadow-navbar: 0 2px 20px 0 rgb(57 57 57 / 0.1);

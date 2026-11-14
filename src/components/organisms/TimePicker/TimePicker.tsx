@@ -122,7 +122,7 @@ export function TimePicker({
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "flex h-10 min-w-[200px] items-center gap-2 rounded-md border border-neutral-100 bg-white px-3 text-caption shadow-input outline-none transition-[border-color,box-shadow] focus-visible:border-primary-300 focus-visible:ring-4 focus-visible:ring-primary-50",
+          "flex min-w-[200px] items-center gap-2 rounded-lg border border-neutral-100 bg-white px-4 py-2 text-caption shadow-input outline-none transition-[border-color,box-shadow] focus-visible:border-primary-300 focus-visible:ring-4 focus-visible:ring-primary-50",
           hasValue ? "text-neutral-900" : "text-neutral-400",
         )}
       >

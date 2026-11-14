@@ -76,7 +76,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   },
   ref,
 ) {
-  const iconSize = size === "desktop" ? 20 : 16;
+  const iconSize = 16;
   return (
     <button
       ref={ref}

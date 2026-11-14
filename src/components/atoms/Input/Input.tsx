@@ -21,7 +21,7 @@ export interface InputProps
 /**
  * Kotak input dari "Input / Box" di Figma:
  * tinggi 40, radius 6, padding 8x12, border 1px, shadow tipis.
- * Fokus: border primary/300 + ring 4px primary/50. Error: border error/300.
+ * Fokus: border #A5B4FC + ring 4px #E1E1FE (token focus-border / focus-ring). Error: border error/300.
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {
@@ -44,7 +44,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         "focus-within:ring-4",
         invalid
           ? "border-error-300 focus-within:border-error-500 focus-within:ring-error-50"
-          : "border-neutral-100 focus-within:border-primary-300 focus-within:ring-primary-50",
+          : "border-neutral-100 focus-within:border-focus-border focus-within:ring-focus-ring",
         disabled && "cursor-not-allowed bg-neutral-50 text-neutral-300",
         fullWidth ? "w-full" : "w-auto",
         className,
