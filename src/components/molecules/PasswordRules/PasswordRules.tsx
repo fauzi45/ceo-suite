@@ -2,17 +2,25 @@ import { cn } from "@/lib/cn";
 import { PASSWORD_RULES } from "@/lib/validations/auth";
 import { Icon } from "@/components/atoms/Icon/Icon";
 
+export interface PasswordRule {
+  id: string;
+  label: string;
+  test: (value: string) => boolean;
+}
+
 export interface PasswordRulesProps {
   /** Password yang sedang diketik; tiap aturan menyala hijau saat terpenuhi. */
   value: string;
+  /** Daftar aturan. Default: aturan password Sign Up. */
+  rules?: readonly PasswordRule[];
   className?: string;
 }
 
-/** Checklist aturan password di bawah field password (form Sign Up). */
-export function PasswordRules({ value, className }: PasswordRulesProps) {
+/** Checklist aturan password di bawah field password (Sign Up dan Reset Password). */
+export function PasswordRules({ value, rules = PASSWORD_RULES, className }: PasswordRulesProps) {
   return (
     <ul aria-label="Password requirements" className={cn("flex flex-col gap-2", className)}>
-      {PASSWORD_RULES.map((rule) => {
+      {rules.map((rule) => {
         const met = rule.test(value);
         return (
           <li key={rule.id} className="flex items-center gap-2 text-caption text-neutral-700">

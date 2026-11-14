@@ -67,6 +67,34 @@ export const identitySchema = z.object({
 
 export type IdentityFormValues = z.infer<typeof identitySchema>;
 
+export const forgotPasswordSchema = z.object({ email: emailSchema });
+
+export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
+
+/** Aturan password baru di form Reset Password (teks sesuai Figma). "Password is match" dihitung di form. */
+export const RESET_PASSWORD_RULES = [
+  { id: "length", label: "At least 6 character", test: (v: string) => v.length >= 6 },
+  { id: "number", label: "At least 1 number", test: (v: string) => /\d/.test(v) },
+] as const;
+
+export const resetPasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .min(1, "Password is required")
+      .refine(
+        (value) => RESET_PASSWORD_RULES.every((rule) => rule.test(value)),
+        "Password does not meet the requirements",
+      ),
+    confirmPassword: z.string().min(1, "Please retype your new password"),
+  })
+  .refine((values) => values.password === values.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords do not match",
+  });
+
+export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
+
 export const OTP_LENGTH = 6;
 
 export const otpSchema = z.object({

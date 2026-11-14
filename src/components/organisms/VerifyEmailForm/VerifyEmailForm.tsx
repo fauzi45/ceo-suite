@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/cn";
+import { clearPendingEmail } from "@/lib/signup-session";
 import { otpSchema, OTP_LENGTH } from "@/lib/validations/auth";
 import { Button } from "@/components/atoms/Button/Button";
 import { OtpField } from "@/components/molecules/OtpField/OtpField";
@@ -15,6 +16,8 @@ export interface VerifyEmailFormProps {
   onResend?: () => void;
   /** Judul modal sukses setelah verifikasi berhasil. */
   successTitle?: string;
+  /** Jika diisi, berpindah ke halaman ini setelah verifikasi (tanpa modal sukses). */
+  nextHref?: string;
   className?: string;
 }
 
@@ -28,6 +31,7 @@ export function VerifyEmailForm({
   onVerify,
   onResend,
   successTitle = "Successfully create your account!",
+  nextHref,
   className,
 }: VerifyEmailFormProps) {
   const router = useRouter();
@@ -41,7 +45,8 @@ export function VerifyEmailForm({
     setSubmitting(true);
     try {
       await (onVerify ?? simulateVerify)(code);
-      setVerified(true);
+      if (nextHref) router.push(nextHref);
+      else setVerified(true);
     } finally {
       setSubmitting(false);
     }
@@ -81,7 +86,11 @@ export function VerifyEmailForm({
         open={verified}
         title={successTitle}
         actionLabel="Go to Login"
-        onAction={() => router.push("/login")}
+        onAction={() => {
+          // Alur selesai: hapus email tersimpan dan ganti riwayat supaya Back tidak kembali ke sini.
+          clearPendingEmail();
+          router.replace("/login");
+        }}
       />
     </>
   );

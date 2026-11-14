@@ -14,5 +14,8 @@ export default meta;
 
 type Story = StoryObj<typeof VerifyEmailForm>;
 
-/** Tombol Verify nonaktif sampai 6 digit terisi. */
+/** Tombol Verify nonaktif sampai 6 digit terisi; setelah itu modal sukses muncul. */
 export const Default: Story = {};
+
+/** Alur Forgot Password: tanpa modal, langsung pindah ke halaman berikutnya. */
+export const ForgotPasswordFlow: Story = { args: { nextHref: "/forgot-password/reset" } };

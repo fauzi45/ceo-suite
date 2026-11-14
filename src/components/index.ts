@@ -25,7 +25,11 @@ export { SuccessBadge, type SuccessBadgeProps } from "./atoms/SuccessBadge/Succe
 // Molecules
 export { AuthHeader, type AuthHeaderProps } from "./molecules/AuthHeader/AuthHeader";
 export { OtpField, type OtpFieldProps } from "./molecules/OtpField/OtpField";
-export { PasswordRules, type PasswordRulesProps } from "./molecules/PasswordRules/PasswordRules";
+export {
+  PasswordRules,
+  type PasswordRule,
+  type PasswordRulesProps,
+} from "./molecules/PasswordRules/PasswordRules";
 export { ResendCode, type ResendCodeProps } from "./molecules/ResendCode/ResendCode";
 export { FormField, type FormFieldProps } from "./molecules/FormField/FormField";
 export { PasswordField, type PasswordFieldProps } from "./molecules/PasswordField/PasswordField";
@@ -51,6 +55,14 @@ export { AuthLayout, type AuthLayoutProps } from "./templates/AuthLayout/AuthLay
 export { LoginForm, type LoginFormProps } from "./organisms/LoginForm/LoginForm";
 export { SignUpForm, type SignUpFormProps } from "./organisms/SignUpForm/SignUpForm";
 export { SuccessModal, type SuccessModalProps } from "./organisms/SuccessModal/SuccessModal";
+export {
+  ForgotPasswordForm,
+  type ForgotPasswordFormProps,
+} from "./organisms/ForgotPasswordForm/ForgotPasswordForm";
+export {
+  ResetPasswordForm,
+  type ResetPasswordFormProps,
+} from "./organisms/ResetPasswordForm/ResetPasswordForm";
 export { IdentityModal, type IdentityModalProps } from "./organisms/IdentityModal/IdentityModal";
 export {
   VerifyEmailForm,

@@ -13,6 +13,15 @@ export function setPendingEmail(email: string) {
   }
 }
 
+/** Dipanggil saat sebuah alur (sign up / reset password) selesai, supaya state lama tidak terbawa ke alur berikutnya. */
+export function clearPendingEmail() {
+  try {
+    sessionStorage.removeItem(KEY);
+  } catch {
+    // Storage diblokir: tidak ada yang perlu dihapus.
+  }
+}
+
 export function getPendingEmail(): string | null {
   try {
     return sessionStorage.getItem(KEY);

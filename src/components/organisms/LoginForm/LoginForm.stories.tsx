@@ -5,6 +5,8 @@ import { LoginForm } from "./LoginForm";
 const meta: Meta<typeof LoginForm> = {
   title: "Organisms/LoginForm",
   component: LoginForm,
+  // LoginForm memakai useRouter dari App Router (pindah halaman setelah login mock).
+  parameters: { nextjs: { appDirectory: true } },
   args: { onSubmit: fn() },
   decorators: [(Story) => <div className="mx-auto w-full max-w-120 p-4"><Story /></div>],
 };

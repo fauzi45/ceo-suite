@@ -1,8 +1,11 @@
 "use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { cn } from "@/lib/cn";
+import { login } from "@/lib/auth";
 import { loginSchema, type LoginFormValues } from "@/lib/validations/auth";
 import { Button } from "@/components/atoms/Button/Button";
 import { Checkbox } from "@/components/atoms/Checkbox/Checkbox";
@@ -11,18 +14,27 @@ import { FormField } from "@/components/molecules/FormField/FormField";
 import { PasswordField } from "@/components/molecules/PasswordField/PasswordField";
 
 export interface LoginFormProps {
-  /** Dipanggil dengan nilai yang sudah tervalidasi. Tanpa ini, login disimulasikan ±800ms. */
+  /**
+   * Dipanggil dengan nilai yang sudah tervalidasi. Tanpa ini, form memakai login mock
+   * (`@/lib/auth`: admin@admin.com / admin123), menyimpan status login, lalu pindah ke `redirectTo`.
+   */
   onSubmit?: (values: LoginFormValues) => void | Promise<void>;
+  /** Tujuan setelah login mock berhasil. */
+  redirectTo?: string;
   className?: string;
 }
 
-const simulateLogin = () => new Promise<void>((resolve) => setTimeout(resolve, 800));
+const simulateDelay = () => new Promise<void>((resolve) => setTimeout(resolve, 800));
 
 /** Form login: email, password, remember me, forgot password, Sign In, dan tautan Sign Up. */
-export function LoginForm({ onSubmit, className }: LoginFormProps) {
+export function LoginForm({ onSubmit, redirectTo = "/", className }: LoginFormProps) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
+    watch,
     formState: { errors, isValid, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -30,8 +42,23 @@ export function LoginForm({ onSubmit, className }: LoginFormProps) {
     defaultValues: { email: "", password: "", rememberMe: false },
   });
 
+  // Pesan "email atau password salah" hilang begitu pengguna mengubah isian.
+  useEffect(() => {
+    const subscription = watch(() => clearErrors("root"));
+    return () => subscription.unsubscribe();
+  }, [watch, clearErrors]);
+
   const submit = handleSubmit(async (values) => {
-    await (onSubmit ?? simulateLogin)(values);
+    if (onSubmit) {
+      await onSubmit(values);
+      return;
+    }
+    await simulateDelay();
+    if (!login(values.email, values.password)) {
+      setError("root", { message: "Invalid email or password" });
+      return;
+    }
+    router.replace(redirectTo);
   });
 
   return (
@@ -76,9 +103,15 @@ export function LoginForm({ onSubmit, className }: LoginFormProps) {
         <TextLink href="/forgot-password">Forgot Password</TextLink>
       </div>
 
+      {errors.root && (
+        <p role="alert" className="mt-4 text-center text-caption text-error-500">
+          {errors.root.message}
+        </p>
+      )}
+
       <Button
         type="submit"
-        disabled={!isValid || isSubmitting}
+        disabled={isSubmitting || (!isValid && !errors.root)}
         iconLeft={isSubmitting ? "loading" : undefined}
         className="mt-12 w-full md:mt-16 md:w-77 md:self-center"
       >
