@@ -16,6 +16,8 @@ export interface InputProps
   invalid?: boolean;
   /** Lebar penuh (default). */
   fullWidth?: boolean;
+  /** `md` = tinggi 40 (Input / Box), `lg` = tinggi 48 (field login/sign up). */
+  inputSize?: "md" | "lg";
 }
 
 /**
@@ -31,6 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     suffix,
     invalid,
     fullWidth = true,
+    inputSize = "md",
     className,
     disabled,
     ...rest
@@ -40,7 +43,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <div
       className={cn(
-        "flex h-10 items-center gap-3 rounded-md border bg-white px-3 py-2 shadow-input transition-[border-color,box-shadow]",
+        "flex items-center gap-3 rounded-md border bg-white px-3 py-2 shadow-input transition-[border-color,box-shadow]",
+        inputSize === "lg" ? "h-12" : "h-10",
         "focus-within:ring-4",
         invalid
           ? "border-error-300 focus-within:border-error-500 focus-within:ring-error-50"
