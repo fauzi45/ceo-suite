@@ -28,7 +28,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const base =
   "inline-flex items-center justify-center gap-2 rounded-lg font-medium leading-[1.2] " +
   "transition-colors outline-none focus-visible:ring-4 focus-visible:ring-primary-100 " +
-  "disabled:cursor-not-allowed select-none whitespace-nowrap";
+  "cursor-pointer disabled:cursor-not-allowed select-none whitespace-nowrap";
 
 const sizes: Record<ButtonSize, string> = {
   desktop: "px-4 py-3 text-body",

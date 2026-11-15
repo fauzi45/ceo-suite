@@ -27,7 +27,7 @@ export function EmailCapture({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={cn("flex items-center gap-4", className)}>
+    <form onSubmit={handleSubmit} className={cn("flex w-full items-center gap-4 md:w-auto", className)}>
       <Input
         type="email"
         name="email"
@@ -35,10 +35,10 @@ export function EmailCapture({
         placeholder={placeholder}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="h-11 w-[230px]"
+        className="h-11 min-w-0 flex-1 md:w-[230px] md:flex-none"
         fullWidth={false}
       />
-      <Button type="submit" size="mobile" className="h-11">
+      <Button type="submit" size="mobile" className="h-11 shrink-0">
         {buttonLabel}
       </Button>
     </form>

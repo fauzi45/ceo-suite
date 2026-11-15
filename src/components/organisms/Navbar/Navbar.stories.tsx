@@ -14,3 +14,9 @@ type Story = StoryObj<typeof Navbar>;
 
 export const Default: Story = {};
 export const NoActiveLink: Story = { args: { activeId: undefined } };
+
+/** Versi login: avatar + nama dengan dropdown (My Booking, Profile, Logout). */
+export const LoggedIn: Story = { args: { user: { name: "Jane Doe" }, onUserMenuSelect: fn() } };
+
+/** Di bawah 1280px link dilipat ke tombol hamburger. */
+export const Mobile: Story = { globals: { viewport: { value: "mobile1", isRotated: false } } };

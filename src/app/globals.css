@@ -159,3 +159,32 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+/*
+ * Tailwind v4 tidak lagi memberi cursor pointer pada <button>. Semua elemen yang bisa diklik
+ * (tombol, link, label kontrol, elemen ber-role button) dipaksa pointer di sini supaya tidak perlu
+ * menulis `cursor-pointer` di tiap komponen. Tombol disabled tetap `not-allowed` (diatur di Button).
+ */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href],
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+}
+
+/* Strip logo berjalan ke kanan. Track berisi dua salinan daftar, jadi geser -50% -> 0 tampak tanpa putus. */
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@utility animate-marquee-right {
+  animation: marquee-right 40s linear infinite;
+}
