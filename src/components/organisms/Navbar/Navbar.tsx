@@ -20,7 +20,7 @@ export const DEFAULT_NAV_LINKS: NavLink[] = [
   { id: "workspaces", label: "Workspaces", href: "/search" },
   { id: "services", label: "Services", href: "#" },
   { id: "package", label: "Package", href: "#" },
-  { id: "promotions", label: "Promotions & Deals!", href: "#" },
+  { id: "promotions", label: "Promotions & Deals!", href: "/promotions" },
   { id: "news", label: "News", href: "#" },
 ];
 
@@ -70,9 +70,9 @@ export function Navbar({
           {links.map((link) => {
             const active = link.id === activeId;
             return (
-              <a
+              <Link
                 key={link.id}
-                href={link.href}
+                href={link.href ?? "#"}
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "whitespace-nowrap text-heading-sm leading-[1.2] transition-colors",
@@ -80,7 +80,7 @@ export function Navbar({
                 )}
               >
                 {link.label}
-              </a>
+              </Link>
             );
           })}
         </nav>
@@ -117,9 +117,9 @@ export function Navbar({
             {links.map((link) => {
               const active = link.id === activeId;
               return (
-                <a
+                <Link
                   key={link.id}
-                  href={link.href}
+                  href={link.href ?? "#"}
                   aria-current={active ? "page" : undefined}
                   onClick={() => setMenuOpen(false)}
                   className={cn(
@@ -128,7 +128,7 @@ export function Navbar({
                   )}
                 >
                   {link.label}
-                </a>
+                </Link>
               );
             })}
           </nav>

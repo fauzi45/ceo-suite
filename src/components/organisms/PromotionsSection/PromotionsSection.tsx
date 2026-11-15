@@ -28,7 +28,7 @@ export function PromotionsSection({
         />
         <div className="grid gap-4 md:grid-cols-3 md:gap-6">
           {promotions.map((promo) => (
-            <PromoCard key={promo.id} promo={promo} />
+            <PromoCard key={promo.id} promo={promo} href={`/promotions/${promo.id}`} />
           ))}
         </div>
       </Container>

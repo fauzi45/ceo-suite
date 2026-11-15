@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { Container } from "@/components/atoms/Container/Container";
 import { Logo } from "@/components/atoms/Logo/Logo";
@@ -13,7 +14,7 @@ export const DEFAULT_FOOTER_LINKS: FooterLink[] = [
   { id: "home", label: "Home", href: "#" },
   { id: "workspaces", label: "Workspaces", href: "#" },
   { id: "services", label: "Services", href: "#" },
-  { id: "promotions", label: "Promotion & Deals!", href: "#" },
+  { id: "promotions", label: "Promotion & Deals!", href: "/promotions" },
   { id: "news", label: "News", href: "#" },
 ];
 
@@ -40,13 +41,13 @@ export function Footer({
         <Logo height={32} />
         <nav aria-label="Navigasi footer" className="flex flex-wrap gap-6">
           {links.map((link) => (
-            <a
+            <Link
               key={link.id}
-              href={link.href}
+              href={link.href ?? "#"}
               className="text-body font-medium leading-[1.2] text-neutral-600 transition-colors hover:text-primary-800"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </Container>

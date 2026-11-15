@@ -73,6 +73,14 @@ export const ICON_NAMES = [
   "room-theatre",
   "room-combined",
   "dot",
+  "arrow-right",
+  "megaphone",
+  "voucher",
+  "facebook",
+  "instagram",
+  "x-twitter",
+  "linkedin",
+  "youtube",
 ] as const;
 
 export type IconName = (typeof ICON_NAMES)[number];

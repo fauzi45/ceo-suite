@@ -13,3 +13,4 @@ export default meta;
 type Story = StoryObj<typeof PromoCard>;
 
 export const Default: Story = {};
+export const Unavailable: Story = { args: { unavailable: true } };

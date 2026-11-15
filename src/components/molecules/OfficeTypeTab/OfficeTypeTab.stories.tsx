@@ -13,3 +13,5 @@ type Story = StoryObj<typeof OfficeTypeTab>;
 
 export const Inactive: Story = {};
 export const Active: Story = { args: { active: true } };
+export const Large: Story = { args: { size: "lg", icon: "voucher", label: "Vouchers", iconClassName: "text-teal-600" } };
+export const LargeActive: Story = { args: { size: "lg", icon: "voucher", label: "Vouchers", active: true } };

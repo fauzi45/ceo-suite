@@ -6,6 +6,8 @@ export interface OfficeTypeTabEntry {
   id: string;
   label: string;
   icon: IconName;
+  /** Warna icon saat tab tidak aktif. */
+  iconClassName?: string;
 }
 
 /** Urutan tab persis seperti frame "Office type" di Figma. */
@@ -25,6 +27,8 @@ export interface OfficeTypeTabsProps {
   tabs?: OfficeTypeTabEntry[];
   value: string;
   onChange?: (id: string) => void;
+  /** Ukuran tab (lihat `OfficeTypeTab`). */
+  size?: "sm" | "lg";
   className?: string;
 }
 
@@ -33,6 +37,7 @@ export function OfficeTypeTabs({
   tabs = OFFICE_TYPE_TABS,
   value,
   onChange,
+  size,
   className,
 }: OfficeTypeTabsProps) {
   return (
@@ -46,6 +51,8 @@ export function OfficeTypeTabs({
           key={tab.id}
           icon={tab.icon}
           label={tab.label}
+          size={size}
+          iconClassName={tab.iconClassName}
           active={tab.id === value}
           onClick={() => onChange?.(tab.id)}
         />
