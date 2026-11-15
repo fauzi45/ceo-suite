@@ -17,7 +17,7 @@ export interface NavLink {
 }
 
 export const DEFAULT_NAV_LINKS: NavLink[] = [
-  { id: "workspaces", label: "Workspaces", href: "#" },
+  { id: "workspaces", label: "Workspaces", href: "/search" },
   { id: "services", label: "Services", href: "#" },
   { id: "package", label: "Package", href: "#" },
   { id: "promotions", label: "Promotions & Deals!", href: "#" },

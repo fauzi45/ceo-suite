@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { logout } from "@/lib/auth";
-import { useAuth } from "@/lib/use-auth";
+import { buildSearchHref } from "@/lib/search-params";
+import { useSiteNavbar } from "@/lib/use-site-navbar";
 import { AppDownloadSection } from "@/components/organisms/AppDownloadSection/AppDownloadSection";
 import { BestDealsSection } from "@/components/organisms/BestDealsSection/BestDealsSection";
 import { BrowseSpacesSection } from "@/components/organisms/BrowseSpacesSection/BrowseSpacesSection";
@@ -16,13 +16,8 @@ import { PromotionsSection } from "@/components/organisms/PromotionsSection/Prom
 import { RecommendedSection } from "@/components/organisms/RecommendedSection/RecommendedSection";
 import { StatsSection } from "@/components/organisms/StatsSection/StatsSection";
 import { TrustedBySection } from "@/components/organisms/TrustedBySection/TrustedBySection";
+import type { SpaceSearchFormProps } from "@/components/organisms/SpaceSearchForm/SpaceSearchForm";
 import { LandingLayout } from "@/components/templates/LandingLayout/LandingLayout";
-
-/** "admin@admin.com" -> "Admin". Nama asli belum ada, jadi diambil dari bagian depan email. */
-const displayName = (email: string) => {
-  const local = email.split("@")[0] ?? email;
-  return local.charAt(0).toUpperCase() + local.slice(1);
-};
 
 /**
  * Landing page dengan dua versi:
@@ -31,32 +26,22 @@ const displayName = (email: string) => {
  * Status login dibaca dari localStorage (client), jadi render pertama selalu versi belum login.
  */
 export function LandingContent() {
-  const email = useAuth();
   const router = useRouter();
-  const user = email ? { name: displayName(email) } : undefined;
+  const { navbarProps, isLoggedIn } = useSiteNavbar();
+  const onSearch: SpaceSearchFormProps["onSearch"] = (criteria) => router.push(buildSearchHref(criteria));
 
   return (
-    <LandingLayout
-      navbarProps={{
-        activeId: "workspaces",
-        user,
-        onSignIn: () => router.push("/login"),
-        onSignUp: () => router.push("/sign-up"),
-        onUserMenuSelect: (value) => {
-          if (value === "logout") logout();
-        },
-      }}
-    >
-      {user ? (
+    <LandingLayout navbarProps={navbarProps}>
+      {isLoggedIn ? (
         <>
-          <HeroBanner />
+          <HeroBanner onSearch={onSearch} />
           <RecommendedSection />
           <PromotionsSection />
           <BestDealsSection />
         </>
       ) : (
         <>
-          <HeroSearch />
+          <HeroSearch onSearch={onSearch} />
           <BrowseSpacesSection />
           <RecommendedSection />
           <StatsSection />

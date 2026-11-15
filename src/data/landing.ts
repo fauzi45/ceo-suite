@@ -24,6 +24,11 @@ export interface RoomListing {
   /** Harga periode lebih kecil, contoh "Hourly Rp480,000". */
   secondaryPrice: string;
   image?: string;
+  /** Lokasi, dipakai halaman Search Results (filter + pin peta). */
+  city?: string;
+  region?: string;
+  lat?: number;
+  lng?: number;
 }
 
 const ROOM_TEMPLATES: Omit<RoomListing, "id">[] = [
@@ -294,10 +299,87 @@ export const FAQS: FaqEntry[] = [
 export const CITY_OPTIONS = ["Jakarta", "Surabaya", "Bandung", "Medan", "Bali"];
 export const LOCATION_OPTIONS = ["Jakarta, Wisma GKBI", "Jakarta, AXA Tower", "Jakarta, Sudirman CBD"];
 
+/** Opsi "Space Type": opsi pertama = semua; nilai lainnya = `RoomType`. */
 export const SPACE_TYPE_OPTIONS = [
-  { value: "all", label: "All Rooms" },
-  { value: "offices", label: "Offices" },
+  { value: "all", label: "All Space" },
   { value: "meeting", label: "Meeting Room" },
+  { value: "office", label: "Office" },
   { value: "coworking", label: "Co-working Space" },
-  { value: "event", label: "Event Space" },
+  { value: "board", label: "Board Room" },
+  { value: "class", label: "Class Room" },
+  { value: "seminar", label: "Seminar Room" },
+  { value: "theatre", label: "Theatre Room" },
+  { value: "combined", label: "Combined Room" },
+];
+
+/** Opsi "Select Region" per kota (opsi pertama = semua wilayah). */
+export const REGION_OPTIONS: Record<string, string[]> = {
+  Jakarta: ["All", "Central Jakarta", "South Jakarta", "West Jakarta"],
+  Surabaya: ["All", "Central Surabaya", "East Surabaya"],
+  Bandung: ["All", "North Bandung", "South Bandung"],
+  Medan: ["All"],
+  Bali: ["All", "Denpasar", "Kuta"],
+};
+
+/** Titik tengah peta per kota ([lat, lng]). */
+export const CITY_CENTERS: Record<string, [number, number]> = {
+  Jakarta: [-6.2088, 106.8456],
+  Surabaya: [-7.2575, 112.7521],
+  Bandung: [-6.9175, 107.6191],
+  Medan: [3.5952, 98.6722],
+  Bali: [-8.65, 115.2167],
+};
+
+type SearchRoomSeed = Omit<RoomListing, "id" | "period" | "secondaryPrice" | "price"> & {
+  price: number;
+};
+
+const rupiah = (value: number) => `Rp${value.toLocaleString("en-US")}`;
+
+const SEARCH_ROOM_SEEDS: SearchRoomSeed[] = [
+  { name: "AXA Tower Meeting Room", roomType: "office", people: 4, price: 2880000, city: "Jakarta", region: "South Jakarta", lat: -6.2297, lng: 106.8305, image: img("room-1") },
+  { name: "Suite 7 View", roomType: "coworking", people: 4, price: 2880000, city: "Jakarta", region: "Central Jakarta", lat: -6.1944, lng: 106.8229, image: img("room-3") },
+  { name: "Suite VIP 5 Non View", roomType: "class", people: 4, price: 2880000, city: "Jakarta", region: "South Jakarta", lat: -6.2615, lng: 106.8106, image: img("room-4") },
+  { name: "Suite 7 View", roomType: "seminar", people: 4, price: 2880000, city: "Jakarta", region: "Central Jakarta", lat: -6.2088, lng: 106.8199, image: img("room-3") },
+  { name: "Suite VIP 5 Non View", roomType: "meeting", people: 4, price: 2880000, city: "Jakarta", region: "West Jakarta", lat: -6.1683, lng: 106.7589, image: img("room-4") },
+  { name: "AXA Tower Meeting Room", roomType: "theatre", people: 4, price: 2880000, city: "Jakarta", region: "South Jakarta", lat: -6.2441, lng: 106.8003, image: img("room-1") },
+  { name: "Wisma GKBI Board Room", roomType: "board", people: 12, price: 3600000, city: "Jakarta", region: "Central Jakarta", lat: -6.2146, lng: 106.8186, image: img("room-2") },
+  { name: "Sudirman CBD Combined Room", roomType: "combined", people: 20, price: 4200000, city: "Jakarta", region: "South Jakarta", lat: -6.2255, lng: 106.8091, image: img("room-1") },
+  { name: "Gatot Subroto Office", roomType: "office", people: 6, price: 3100000, city: "Jakarta", region: "South Jakarta", lat: -6.2349, lng: 106.8227, image: img("room-3") },
+  { name: "Thamrin Meeting Room", roomType: "meeting", people: 8, price: 1900000, city: "Jakarta", region: "Central Jakarta", lat: -6.1936, lng: 106.8231, image: img("room-2") },
+  { name: "Braga Co-working", roomType: "coworking", people: 2, price: 950000, city: "Bandung", region: "North Bandung", lat: -6.9147, lng: 107.6098, image: img("room-4") },
+  { name: "Dago Meeting Room", roomType: "meeting", people: 6, price: 1500000, city: "Bandung", region: "North Bandung", lat: -6.8932, lng: 107.6132, image: img("room-2") },
+  { name: "Tunjungan Office", roomType: "office", people: 6, price: 2400000, city: "Surabaya", region: "Central Surabaya", lat: -7.2625, lng: 112.7378, image: img("room-3") },
+  { name: "Darmo Board Room", roomType: "board", people: 10, price: 2700000, city: "Surabaya", region: "Central Surabaya", lat: -7.2894, lng: 112.7387, image: img("room-1") },
+  { name: "Seminyak Co-working", roomType: "coworking", people: 3, price: 1100000, city: "Bali", region: "Kuta", lat: -8.6913, lng: 115.1683, image: img("room-4") },
+  { name: "Sanur Seminar Room", roomType: "seminar", people: 40, price: 5200000, city: "Bali", region: "Denpasar", lat: -8.6905, lng: 115.2632, image: img("room-2") },
+];
+
+/** Hasil pencarian contoh (belum ada API): tersebar di beberapa kota supaya filter City/Region terlihat bekerja. */
+export const SEARCH_ROOMS: RoomListing[] = SEARCH_ROOM_SEEDS.map(({ price, ...room }, index) => ({
+  ...room,
+  id: `search-room-${index + 1}`,
+  period: "Daily",
+  price: rupiah(price),
+  secondaryPrice: `Hourly ${rupiah(Math.round(price / 6 / 1000) * 1000)}`,
+}));
+
+export interface OtherSpace {
+  id: string;
+  label: string;
+  roomType: RoomType;
+  image: string;
+  /** Foto belum memuat penanda panah merah (foto dari Figma untuk 3 kategori pertama sudah). */
+  needsMarker?: boolean;
+}
+
+/** Carousel "Other Spaces" di halaman Search Results. */
+export const OTHER_SPACES: OtherSpace[] = [
+  { id: "coworking", label: "Coworking Space", roomType: "coworking", image: img("space-coworking-sq") },
+  { id: "meeting", label: "Meeting Room", roomType: "meeting", image: img("other-meeting"), needsMarker: true },
+  { id: "board", label: "Board Room", roomType: "board", image: img("other-board"), needsMarker: true },
+  { id: "class", label: "Class Room", roomType: "class", image: img("other-class"), needsMarker: true },
+  { id: "seminar", label: "Seminar Room", roomType: "seminar", image: img("other-seminar"), needsMarker: true },
+  { id: "theatre", label: "Theatre Room", roomType: "theatre", image: img("other-theatre"), needsMarker: true },
+  { id: "office", label: "Private Offices", roomType: "office", image: img("space-offices-sq") },
 ];

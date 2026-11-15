@@ -3,11 +3,15 @@
 import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { RECOMMENDED_ROOMS, type RoomListing } from "@/data/landing";
-import { Icon, type IconName } from "@/components/atoms/Icon/Icon";
 import { ROOM_TYPE_ICONS, ROOM_TYPE_LABELS, type RoomType } from "@/components/atoms/Chip/Chip";
 import { Container } from "@/components/atoms/Container/Container";
 import { RoomCard } from "@/components/molecules/RoomCard/RoomCard";
 import { SectionHeader } from "@/components/molecules/SectionHeader/SectionHeader";
+import {
+  OFFICE_TYPE_TABS,
+  OfficeTypeTabs,
+  type OfficeTypeTabEntry,
+} from "@/components/organisms/OfficeTypeTabs/OfficeTypeTabs";
 
 export interface RecommendedSectionProps {
   rooms?: RoomListing[];
@@ -15,32 +19,17 @@ export interface RecommendedSectionProps {
   className?: string;
 }
 
-type FilterValue = "all" | RoomType;
-
-/** Urutan dan isi tab mengikuti "Office type" di Figma (System Design). */
-const FILTER_TYPES: RoomType[] = [
-  "meeting",
-  "office",
-  "coworking",
-  "board",
-  "class",
-  "seminar",
-  "theatre",
-  "combined",
-];
-
-const FILTER_OPTIONS: { value: FilterValue; label: string; icon: IconName }[] = [
-  { value: "all", label: "All Spaces", icon: "room-all" },
-  ...FILTER_TYPES.map((type) => ({
-    value: type,
-    label: ROOM_TYPE_LABELS[type],
-    icon: ROOM_TYPE_ICONS[type],
-  })),
+/** Tab "Office type" dengan label lengkap tipe ruangan (mis. "Combined Boardroom Meeting Room"). */
+const RECOMMENDED_TABS: OfficeTypeTabEntry[] = [
+  OFFICE_TYPE_TABS[0],
+  ...(
+    ["meeting", "office", "coworking", "board", "class", "seminar", "theatre", "combined"] as RoomType[]
+  ).map((type) => ({ id: type, label: ROOM_TYPE_LABELS[type], icon: ROOM_TYPE_ICONS[type] })),
 ];
 
 /**
  * "Recommended For You": tombol Filter membuka deretan tab tipe ruangan (ikon di atas label, tab aktif
- * merah dengan garis bawah, seperti "Office type" di Figma) lalu grid kartu ruangan (1 / 2 / 4 kolom).
+ * merah dengan garis bawah, memakai `OfficeTypeTabs`) lalu grid kartu ruangan (1 / 2 / 4 kolom).
  */
 export function RecommendedSection({
   rooms = RECOMMENDED_ROOMS,
@@ -48,7 +37,7 @@ export function RecommendedSection({
   className,
 }: RecommendedSectionProps) {
   const [filterOpen, setFilterOpen] = useState(false);
-  const [filter, setFilter] = useState<FilterValue>("all");
+  const [filter, setFilter] = useState("all");
 
   const visibleRooms = filter === "all" ? rooms : rooms.filter((room) => room.roomType === filter);
 
@@ -68,34 +57,7 @@ export function RecommendedSection({
         />
 
         {filterOpen && (
-          <div
-            role="tablist"
-            aria-label="Filter by office type"
-            className="-mt-2 flex overflow-x-auto border-b border-neutral-100"
-          >
-            {FILTER_OPTIONS.map((option) => {
-              const active = option.value === filter;
-              return (
-                <button
-                  key={option.value}
-                  type="button"
-                  role="tab"
-                  aria-selected={active}
-                  onClick={() => setFilter(option.value)}
-                  className={cn(
-                    "flex shrink-0 cursor-pointer flex-col items-center gap-2 border-b-2 px-4 pb-3 pt-2 text-caption font-medium leading-[1.2] whitespace-nowrap outline-none transition-colors",
-                    "focus-visible:ring-4 focus-visible:ring-primary-100 md:px-6 md:text-body",
-                    active
-                      ? "border-primary-800 text-primary-800"
-                      : "border-transparent text-neutral-400 hover:text-neutral-600",
-                  )}
-                >
-                  <Icon name={option.icon} size={28} />
-                  {option.label}
-                </button>
-              );
-            })}
-          </div>
+          <OfficeTypeTabs tabs={RECOMMENDED_TABS} value={filter} onChange={setFilter} className="-mt-2" />
         )}
 
         {visibleRooms.length > 0 ? (

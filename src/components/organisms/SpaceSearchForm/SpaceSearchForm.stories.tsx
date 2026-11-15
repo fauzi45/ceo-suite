@@ -20,3 +20,8 @@ export const Card: Story = {};
 export const Bar: Story = {
   args: { variant: "bar", locationLabel: "Select Location", locationOptions: LOCATION_OPTIONS },
 };
+
+/** Halaman Search Results: ada "Select Region", tanpa tombol Search (hasil ikut berubah saat field diubah). */
+export const Inline: Story = {
+  args: { variant: "inline", onChange: fn() },
+};

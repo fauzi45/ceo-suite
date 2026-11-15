@@ -148,3 +148,8 @@ export { AppDownloadSection, type AppDownloadSectionProps } from "./organisms/Ap
 // Landing page: template
 export { LandingLayout, type LandingLayoutProps } from "./templates/LandingLayout/LandingLayout";
 export { SelectDropdown, type SelectDropdownProps } from "./molecules/SelectDropdown/SelectDropdown";
+
+// Search Results
+export { SearchResultsSection, type SearchResultsSectionProps } from "./organisms/SearchResultsSection/SearchResultsSection";
+export { OtherSpacesSection, type OtherSpacesSectionProps } from "./organisms/OtherSpacesSection/OtherSpacesSection";
+export { SpaceMap, type SpaceMapProps } from "./organisms/SpaceMap/SpaceMap";
