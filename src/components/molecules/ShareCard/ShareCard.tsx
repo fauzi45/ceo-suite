@@ -8,6 +8,8 @@ export interface ShareCardProps {
   title?: string;
   /** Alamat yang dibagikan. Default: alamat halaman saat ini. */
   url?: string;
+  /** Judul kartu. Default "Share this promo"; halaman News memakai "This Article is Helpful?". */
+  heading?: string;
   className?: string;
 }
 
@@ -35,7 +37,7 @@ const buttonClass =
   "hover:bg-primary-600 active:bg-primary-900 focus-visible:ring-4 focus-visible:ring-primary-100";
 
 /** Kartu "Share this promo": tombol bagikan + Facebook, Instagram, X, LinkedIn, YouTube. */
-export function ShareCard({ title = "", url, className }: ShareCardProps) {
+export function ShareCard({ title = "", url, heading = "Share this promo", className }: ShareCardProps) {
   const open = (target: ShareTarget) => {
     const shareUrl = url ?? window.location.href;
     if (target.href) {
@@ -49,7 +51,7 @@ export function ShareCard({ title = "", url, className }: ShareCardProps) {
 
   return (
     <section className={cn("flex flex-col gap-3 rounded-xl bg-white p-6 shadow-popover", className)}>
-      <h2 className="text-body font-bold leading-[1.2] text-neutral-950">Share this promo</h2>
+      <h2 className="text-body font-bold leading-[1.2] text-neutral-950">{heading}</h2>
       <div className="flex gap-2">
         {TARGETS.map((target) => (
           <button
