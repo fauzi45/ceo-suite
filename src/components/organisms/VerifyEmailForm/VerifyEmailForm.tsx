@@ -18,6 +18,8 @@ export interface VerifyEmailFormProps {
   successTitle?: string;
   /** Jika diisi, berpindah ke halaman ini setelah verifikasi (tanpa modal sukses). */
   nextHref?: string;
+  /** Jika diisi, dipanggil setelah verifikasi berhasil menggantikan modal sukses / `nextHref` (dipakai alur booking guest). */
+  onVerified?: () => void;
   className?: string;
 }
 
@@ -32,6 +34,7 @@ export function VerifyEmailForm({
   onResend,
   successTitle = "Successfully create your account!",
   nextHref,
+  onVerified,
   className,
 }: VerifyEmailFormProps) {
   const router = useRouter();
@@ -45,7 +48,8 @@ export function VerifyEmailForm({
     setSubmitting(true);
     try {
       await (onVerify ?? simulateVerify)(code);
-      if (nextHref) router.push(nextHref);
+      if (onVerified) onVerified();
+      else if (nextHref) router.push(nextHref);
       else setVerified(true);
     } finally {
       setSubmitting(false);
