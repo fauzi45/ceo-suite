@@ -36,8 +36,8 @@ export function LandingContent() {
         <>
           <HeroBanner onSearch={onSearch} />
           <RecommendedSection />
-          <PromotionsSection />
-          <BestDealsSection />
+          <PromotionsSection onSeeAll={() => router.push("/promotions")} />
+          <BestDealsSection onSeeAll={() => router.push("/promotions?category=best-deals")} />
         </>
       ) : (
         <>
@@ -45,8 +45,8 @@ export function LandingContent() {
           <BrowseSpacesSection />
           <RecommendedSection />
           <StatsSection />
-          <PromotionsSection />
-          <BestDealsSection />
+          <PromotionsSection onSeeAll={() => router.push("/promotions")} />
+          <BestDealsSection onSeeAll={() => router.push("/promotions?category=best-deals")} />
           <MeetingPackageSection />
           <PartnersSection />
           <TrustedBySection />

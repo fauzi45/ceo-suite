@@ -16,7 +16,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return { title: product ? `Book ${product.room.name} | CEO SUITE` : "Space not found | CEO SUITE" };
 }
 
-export default async function BookingPage({ params }: PageProps) {
+// partialPrefetching aktif: `params` dibaca di dalam <Suspense> (bukan di level atas page).
+export default function BookingPage({ params }: PageProps) {
+  return (
+    <Suspense>
+      <Booking params={params} />
+    </Suspense>
+  );
+}
+
+async function Booking({ params }: PageProps) {
   const { id } = await params;
   const product = getProduct(id);
   if (!product) notFound();

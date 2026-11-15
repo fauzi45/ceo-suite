@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getProduct, getSimilarRooms, PRODUCT_IDS } from "@/data/product";
 import { ProductContent } from "./ProductContent";
@@ -18,7 +19,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function ProductPage({ params }: PageProps) {
+// partialPrefetching aktif: `params` dibaca di dalam <Suspense> (bukan di level atas page).
+export default function ProductPage({ params }: PageProps) {
+  return (
+    <Suspense>
+      <Product params={params} />
+    </Suspense>
+  );
+}
+
+async function Product({ params }: PageProps) {
   const { id } = await params;
   const product = getProduct(id);
   if (!product) notFound();
