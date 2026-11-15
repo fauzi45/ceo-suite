@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { buildBookingHref } from "@/data/booking";
 import { computeTotal, type ProductDetail } from "@/data/product";
 import type { RoomListing } from "@/data/landing";
 import { useSiteNavbar } from "@/lib/use-site-navbar";
@@ -24,6 +26,7 @@ export interface ProductContentProps {
  * (jarak 64) di atas, peta lokasi selebar penuh di bawahnya.
  */
 export function ProductContent({ product, similar }: ProductContentProps) {
+  const router = useRouter();
   const { navbarProps } = useSiteNavbar();
   const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<TimeRange>({ start: null, end: null });
@@ -44,7 +47,13 @@ export function ProductContent({ product, similar }: ProductContentProps) {
         <ProductGallery photos={product.gallery} alt={product.room.name} />
         <div className="grid gap-8 lg:grid-cols-[1012fr_525fr] lg:items-start lg:gap-x-16">
           <ProductDetailsSection product={product} className="min-w-0" />
-          <BookingSummaryCard date={date} time={time} total={total} className="lg:sticky lg:top-4" />
+          <BookingSummaryCard
+            date={date}
+            time={time}
+            total={total}
+            onBook={() => date && router.push(buildBookingHref(product.room.id, date, time))}
+            className="lg:sticky lg:top-4"
+          />
         </div>
         <ProductLocationSection product={product} />
       </Container>
