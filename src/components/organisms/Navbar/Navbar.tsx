@@ -21,7 +21,7 @@ export const DEFAULT_NAV_LINKS: NavLink[] = [
   { id: "services", label: "Services", href: "#" },
   { id: "package", label: "Package", href: "#" },
   { id: "promotions", label: "Promotions & Deals!", href: "/promotions" },
-  { id: "news", label: "News", href: "#" },
+  { id: "news", label: "News", href: "/news" },
 ];
 
 export const DEFAULT_USER_MENU: DropdownMenuItem[] = [

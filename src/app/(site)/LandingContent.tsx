@@ -50,7 +50,7 @@ export function LandingContent() {
           <MeetingPackageSection />
           <PartnersSection />
           <TrustedBySection />
-          <NewsSection />
+          <NewsSection onSeeAll={() => router.push("/news")} />
           <FaqSection />
           <AppDownloadSection />
         </>

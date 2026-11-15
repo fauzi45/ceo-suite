@@ -142,6 +142,14 @@ export {
 export { PartnersSection, type PartnersSectionProps } from "./organisms/PartnersSection/PartnersSection";
 export { TrustedBySection, type TrustedBySectionProps } from "./organisms/TrustedBySection/TrustedBySection";
 export { NewsSection, type NewsSectionProps } from "./organisms/NewsSection/NewsSection";
+export { NewsCard, type NewsCardProps } from "./molecules/NewsCard/NewsCard";
+export { NewsListItem, type NewsListItemProps } from "./molecules/NewsListItem/NewsListItem";
+export { NewsCategoryTabs, type NewsCategoryTabsProps } from "./organisms/NewsCategoryTabs/NewsCategoryTabs";
+export { NewsPageHeader, type NewsPageHeaderProps } from "./organisms/NewsPageHeader/NewsPageHeader";
+export { NewsFeaturedSection, type NewsFeaturedSectionProps } from "./organisms/NewsFeaturedSection/NewsFeaturedSection";
+export { NewsGridSection, type NewsGridSectionProps } from "./organisms/NewsGridSection/NewsGridSection";
+export { NewsArticle, type NewsArticleProps } from "./organisms/NewsArticle/NewsArticle";
+export { RelatedNewsSection, type RelatedNewsSectionProps } from "./organisms/RelatedNewsSection/RelatedNewsSection";
 export { FaqSection, type FaqSectionProps } from "./organisms/FaqSection/FaqSection";
 export { AppDownloadSection, type AppDownloadSectionProps } from "./organisms/AppDownloadSection/AppDownloadSection";
 

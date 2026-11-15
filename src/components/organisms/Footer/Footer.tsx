@@ -15,7 +15,7 @@ export const DEFAULT_FOOTER_LINKS: FooterLink[] = [
   { id: "workspaces", label: "Workspaces", href: "#" },
   { id: "services", label: "Services", href: "#" },
   { id: "promotions", label: "Promotion & Deals!", href: "/promotions" },
-  { id: "news", label: "News", href: "#" },
+  { id: "news", label: "News", href: "/news" },
 ];
 
 export interface FooterProps {
