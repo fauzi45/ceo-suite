@@ -33,10 +33,10 @@ const formatRupiah = (value: number) => `Rp${value.toLocaleString("en-US")}`;
 
 const addDays = (date: Date, days: number) => new Date(date.getFullYear(), date.getMonth(), date.getDate() + days);
 
-export function getMyBooking(item: MeetingPackage, start: Date): MyBookingDetail {
+export function getMyBooking(item: MeetingPackage, start: Date, invoice = "AXA/458/08/2024"): MyBookingDetail {
   const vat = Math.round((item.price * PACKAGE_VAT_PERCENT) / 100);
   return {
-    invoice: "AXA/458/08/2024",
+    invoice,
     status: "success",
     packageName: item.name,
     access: item.access,

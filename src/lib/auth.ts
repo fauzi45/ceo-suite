@@ -52,6 +52,9 @@ export function getLoggedInEmail(): string | null {
   }
 }
 
+/** Cocokkan password saat ini (mock: password tetap). Dipakai form Change Password. */
+export const verifyPassword = (password: string) => password === MOCK_PASSWORD;
+
 export function isLoggedIn(): boolean {
   return getLoggedInEmail() !== null;
 }

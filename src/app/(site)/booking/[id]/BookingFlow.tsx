@@ -2,7 +2,16 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { parseDateParam, parseTimeParam, type AddOnSelection, type Voucher } from "@/data/booking";
+import {
+  BOOKING_ADD_ONS,
+  computeBookingTotals,
+  parseDateParam,
+  parseTimeParam,
+  toDateParam,
+  type AddOnSelection,
+  type Voucher,
+} from "@/data/booking";
+import { addBooking } from "@/lib/my-bookings";
 import type { ProductDetail } from "@/data/product";
 import { useAuth } from "@/lib/use-auth";
 import { useSiteNavbar } from "@/lib/use-site-navbar";
@@ -44,6 +53,7 @@ export function BookingFlow({ product }: BookingFlowProps) {
   const [request, setRequest] = useState("");
   const [addOns, setAddOns] = useState<AddOnSelection>({});
   const [voucher, setVoucher] = useState<Voucher | null>(null);
+  const [bookingId, setBookingId] = useState<string>();
 
   const productHref = `/product/${product.room.id}`;
   const isGuest = email === null;
@@ -99,8 +109,42 @@ export function BookingFlow({ product }: BookingFlowProps) {
           onContinue={() => setStep("terms")}
         />
       )}
-      {current === "terms" && <BookingTerms onBack={() => setStep("details")} onContinue={() => setStep("confirmed")} />}
-      {current === "confirmed" && <BookingConfirmation product={product} date={date} time={time} />}
+      {current === "terms" && (
+        <BookingTerms
+          onBack={() => setStep("details")}
+          onContinue={() => {
+            // Simpan booking supaya muncul di My Booking; "View Booking" membukanya.
+            const totals = computeBookingTotals(product, time, addOns, voucher);
+            setBookingId(
+              addBooking({
+                kind: "room",
+                refId: product.room.id,
+                date: toDateParam(date),
+                start: time.start ?? undefined,
+                end: time.end ?? undefined,
+                status: "success",
+                basePrice: totals.lines[0].amount,
+                discount: totals.discount,
+                addOns: BOOKING_ADD_ONS.filter((addOn) => addOns[addOn.id]).map((addOn) => ({
+                  name: addOn.name,
+                  qty: addOns[addOn.id],
+                  unitPrice: addOn.price,
+                })),
+                request: request.trim() || undefined,
+              }),
+            );
+            setStep("confirmed");
+          }}
+        />
+      )}
+      {current === "confirmed" && (
+        <BookingConfirmation
+          product={product}
+          date={date}
+          time={time}
+          onViewBooking={() => router.push(bookingId ? `/my-booking/${bookingId}` : "/my-booking")}
+        />
+      )}
     </LandingLayout>
   );
 }

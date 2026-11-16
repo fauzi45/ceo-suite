@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { parseDateParam, type Voucher } from "@/data/booking";
-import { buildMyBookingHref, type MeetingPackage } from "@/data/packages";
+import { parseDateParam, toDateParam, type Voucher } from "@/data/booking";
+import { computePackageTotals, type MeetingPackage } from "@/data/packages";
+import { addBooking } from "@/lib/my-bookings";
 import { useAuth } from "@/lib/use-auth";
 import { useSiteNavbar } from "@/lib/use-site-navbar";
 import { AppDownloadSection } from "@/components/organisms/AppDownloadSection/AppDownloadSection";
@@ -36,6 +37,7 @@ export function PackageBookingFlow({ item }: PackageBookingFlowProps) {
   const [step, setStep] = useState<Step | null>(null);
   const [guest, setGuest] = useState<GuestDetails>();
   const [voucher, setVoucher] = useState<Voucher | null>(null);
+  const [bookingId, setBookingId] = useState<string>();
 
   const isGuest = email === null;
   const current: Step | null = step ?? (email === undefined ? null : isGuest ? "guest" : "details");
@@ -62,7 +64,21 @@ export function PackageBookingFlow({ item }: PackageBookingFlowProps) {
           voucher={voucher}
           onVoucherChange={setVoucher}
           onBack={() => (isGuest ? setStep("guest") : backToList())}
-          onContinue={() => setStep("confirmed")}
+          onContinue={() => {
+            // Simpan booking supaya muncul di My Booking; "View Booking" membukanya.
+            setBookingId(
+              addBooking({
+                kind: "package",
+                refId: item.id,
+                date: toDateParam(startDate),
+                status: "success",
+                basePrice: item.price,
+                discount: computePackageTotals(item, voucher).discount,
+                addOns: [],
+              }),
+            );
+            setStep("confirmed");
+          }}
         />
       )}
       {current === "confirmed" && (
@@ -70,7 +86,7 @@ export function PackageBookingFlow({ item }: PackageBookingFlowProps) {
           <PackageConfirmation
             item={item}
             startDate={startDate}
-            onViewBooking={() => router.push(buildMyBookingHref(item.id, startDate))}
+            onViewBooking={() => router.push(bookingId ? `/my-booking/${bookingId}` : "/my-booking")}
           />
           <AppDownloadSection />
         </>
