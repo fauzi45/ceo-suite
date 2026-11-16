@@ -29,8 +29,8 @@ export function ProfileShell({ children }: { children: ReactNode }) {
   const section = sectionOf(pathname);
 
   return (
-    <LandingLayout navbarProps={navbarProps}>
-      <div className="bg-neutral-25">
+    <LandingLayout navbarProps={navbarProps} mainClassName="bg-neutral-25">
+      <div>
         <Container className="grid gap-6 py-8 lg:grid-cols-[240px_1fr] lg:items-start lg:gap-10 lg:py-12">
           <ProfileSidebar
             active={section}

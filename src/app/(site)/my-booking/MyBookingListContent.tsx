@@ -17,8 +17,8 @@ export function MyBookingListContent() {
   const { navbarProps } = useSiteNavbar("my-booking");
 
   return (
-    <LandingLayout navbarProps={navbarProps}>
-      <div className="bg-neutral-25">
+    <LandingLayout navbarProps={navbarProps} mainClassName="bg-neutral-25">
+      <div>
         <Container className="flex flex-col gap-6 py-8 md:py-12">
           <h1 className="mx-auto w-full max-w-[784px] text-heading-sm font-bold leading-[1.2] text-neutral-950 md:text-heading-md">
             My Bookings

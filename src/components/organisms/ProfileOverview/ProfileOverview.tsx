@@ -25,7 +25,7 @@ export function ProfileOverview({ className }: ProfileOverviewProps) {
     <>
       <section
         className={cn(
-          "grid items-center gap-6 rounded-xl bg-primary-800 p-6 text-white md:p-8 lg:grid-cols-[1fr_auto]",
+          "grid items-center gap-6 rounded-xl bg-primary-800 p-6 text-white md:p-8 lg:grid-cols-[1fr_400px]",
           className,
         )}
       >

@@ -52,7 +52,7 @@ function Carousel({ photos, alt }: { photos: string[]; alt: string }) {
 
   return (
     <div className="relative">
-      <Photo src={photos[index]} alt={alt} priority sizes="(min-width: 1024px) 50vw, 100vw" className="aspect-[2.2/1] w-full rounded-t-lg" />
+      <Photo src={photos[index]} alt={alt} priority sizes="(min-width: 1024px) 50vw, 100vw" className="aspect-[2.6/1] w-full rounded-t-lg" />
       {photos.length > 1 && (
         <>
           <button

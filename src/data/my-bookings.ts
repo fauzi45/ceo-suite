@@ -64,14 +64,15 @@ export function bookingTotals(record: BookingRecord): BookingTotals {
   return { basePrice: record.basePrice, addOnPrice, discount: record.discount, vat, deposit: 0, total: subtotal + vat };
 }
 
-const roomIdByName = (name: string) => SEARCH_ROOMS.find((room) => room.name === name)?.id ?? SEARCH_ROOMS[0].id;
+/** Booking contoh memakai ruang bertipe Office (seperti kartu di Figma: "Office"). */
+const SAMPLE_ROOM_ID = (SEARCH_ROOMS.find((room) => room.roomType === "office") ?? SEARCH_ROOMS[0]).id;
 
 export const SAMPLE_BOOKINGS: BookingRecord[] = [
   {
     id: "bk-1",
     invoice: "AXA/458/08/2024",
     kind: "room",
-    refId: roomIdByName("Suite 7 View"),
+    refId: SAMPLE_ROOM_ID,
     date: "2024-07-10",
     start: "10:00",
     end: "18:00",
@@ -88,7 +89,7 @@ export const SAMPLE_BOOKINGS: BookingRecord[] = [
     id: "bk-2",
     invoice: "AXA/459/08/2024",
     kind: "room",
-    refId: roomIdByName("Suite 7 View"),
+    refId: SAMPLE_ROOM_ID,
     date: "2024-07-10",
     start: "10:00",
     end: "18:00",
@@ -101,7 +102,7 @@ export const SAMPLE_BOOKINGS: BookingRecord[] = [
     id: "bk-3",
     invoice: "AXA/460/08/2024",
     kind: "room",
-    refId: roomIdByName("Suite 7 View"),
+    refId: SAMPLE_ROOM_ID,
     date: "2024-07-10",
     start: "10:00",
     end: "18:00",

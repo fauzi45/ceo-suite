@@ -21,8 +21,8 @@ export function CategoryHero({ title, tagline, image, actionLabel = "Book Now", 
         <Photo src={image} alt="" priority sizes="100vw" className="size-full" />
         <div className="absolute inset-0 bg-neutral-1000/65" />
       </div>
-      <Container className="flex flex-col items-center gap-4 pb-20 pt-12 text-center text-white md:pb-24 md:pt-16">
-        <h1 className="text-heading-lg font-bold leading-[1.2] md:text-display-sm">{title}</h1>
+      <Container className="flex flex-col items-center gap-4 pb-24 pt-14 text-center text-white md:gap-5 md:pb-36 md:pt-24">
+        <h1 className="text-display-sm font-bold leading-[1.2] md:text-display-lg">{title}</h1>
         <p className="text-caption md:text-body">{tagline}</p>
         <Button size="mobile" onClick={onAction} className="mt-2">
           {actionLabel}

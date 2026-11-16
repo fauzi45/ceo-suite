@@ -46,7 +46,7 @@ export function PackageBookingFlow({ item }: PackageBookingFlowProps) {
   const backToList = () => router.push("/package");
 
   return (
-    <LandingLayout navbarProps={navbarProps}>
+    <LandingLayout navbarProps={navbarProps} mainClassName={current === "details" ? "bg-neutral-25" : undefined}>
       {current === "guest" && (
         <GuestDetailsForm
           defaultValues={guest}

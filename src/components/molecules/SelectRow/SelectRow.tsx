@@ -31,7 +31,7 @@ export function SelectRow({ icon, placeholder, children, tone = "default", onCli
     >
       <Icon name={icon} size={20} className={success ? "text-success-600" : "text-primary-800"} />
       <span className="flex min-w-0 flex-1 flex-col gap-0.5 text-caption text-neutral-700">
-        {children ?? placeholder}
+        {children || placeholder}
       </span>
       <Icon name="chevron-right" size={20} className="shrink-0 text-neutral-400" />
     </button>
