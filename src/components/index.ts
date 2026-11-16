@@ -142,6 +142,10 @@ export {
 export { PartnersSection, type PartnersSectionProps } from "./organisms/PartnersSection/PartnersSection";
 export { TrustedBySection, type TrustedBySectionProps } from "./organisms/TrustedBySection/TrustedBySection";
 export { NewsSection, type NewsSectionProps } from "./organisms/NewsSection/NewsSection";
+export { FeatureItem, type FeatureItemProps } from "./molecules/FeatureItem/FeatureItem";
+export { ServiceCard, type ServiceCardProps } from "./molecules/ServiceCard/ServiceCard";
+export { ServiceIntroSection, type ServiceIntroSectionProps } from "./organisms/ServiceIntroSection/ServiceIntroSection";
+export { ServicesSection, type ServicesSectionProps } from "./organisms/ServicesSection/ServicesSection";
 export { NewsCard, type NewsCardProps } from "./molecules/NewsCard/NewsCard";
 export { NewsListItem, type NewsListItemProps } from "./molecules/NewsListItem/NewsListItem";
 export { NewsCategoryTabs, type NewsCategoryTabsProps } from "./organisms/NewsCategoryTabs/NewsCategoryTabs";
