@@ -2,7 +2,8 @@ import { cn } from "@/lib/cn";
 import type { PromoItem } from "@/data/promotions";
 
 export interface PromoDetailSectionProps {
-  promo: PromoItem;
+  /** Cukup field yang dibaca saja, supaya detail partner ikut memakai komponen ini. */
+  promo: Pick<PromoItem, "title" | "description" | "headline" | "body" | "terms">;
   className?: string;
 }
 

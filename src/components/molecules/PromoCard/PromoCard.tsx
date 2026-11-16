@@ -1,5 +1,7 @@
-import Link from "next/link";
+"use client";
+
 import { cn } from "@/lib/cn";
+import { activateProps, useNavigate } from "@/lib/use-navigate";
 import type { Promo } from "@/data/landing";
 import { Photo } from "@/components/atoms/Photo/Photo";
 
@@ -14,6 +16,7 @@ export interface PromoCardProps {
 
 /** Kartu promo: foto lebar, judul tebal, dan keterangan singkat. */
 export function PromoCard({ promo, href, unavailable = false, className }: PromoCardProps) {
+  const navigate = useNavigate();
   const card = (
     <article
       className={cn(
@@ -56,8 +59,11 @@ export function PromoCard({ promo, href, unavailable = false, className }: Promo
 
   if (!href || unavailable) return card;
   return (
-    <Link href={href} className="block h-full rounded-lg outline-none focus-visible:ring-4 focus-visible:ring-primary-100">
+    <div
+      {...activateProps(() => navigate(href))}
+      className="block h-full rounded-lg outline-none focus-visible:ring-4 focus-visible:ring-primary-100"
+    >
       {card}
-    </Link>
+    </div>
   );
 }

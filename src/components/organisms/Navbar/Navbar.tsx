@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { useNavigate } from "@/lib/use-navigate";
 import { Logo } from "@/components/atoms/Logo/Logo";
 import { Button } from "@/components/atoms/Button/Button";
 import { Icon } from "@/components/atoms/Icon/Icon";
@@ -58,29 +58,36 @@ export function Navbar({
   className,
 }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <header className={cn("relative w-full bg-white shadow-navbar", className)}>
       <div className="flex items-center justify-between gap-4 px-4 py-4 sm:px-8 xl:px-40 xl:py-8">
-        <Link href="/" aria-label="CEO Suite, ke halaman utama" className="cursor-pointer">
+        <button
+          type="button"
+          onClick={() => navigate("/")}
+          aria-label="CEO Suite, ke halaman utama"
+          className="cursor-pointer"
+        >
           <Logo height={32} />
-        </Link>
+        </button>
 
         <nav aria-label="Navigasi utama" className="hidden items-center gap-8 xl:flex">
           {links.map((link) => {
             const active = link.id === activeId;
             return (
-              <Link
+              <button
                 key={link.id}
-                href={link.href ?? "#"}
+                type="button"
+                onClick={() => navigate(link.href)}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "whitespace-nowrap text-heading-sm leading-[1.2] transition-colors",
+                  "cursor-pointer whitespace-nowrap text-heading-sm leading-[1.2] transition-colors",
                   active ? "font-bold text-primary-800" : "font-medium text-neutral-600 hover:text-primary-800",
                 )}
               >
                 {link.label}
-              </Link>
+              </button>
             );
           })}
         </nav>
@@ -117,18 +124,21 @@ export function Navbar({
             {links.map((link) => {
               const active = link.id === activeId;
               return (
-                <Link
+                <button
                   key={link.id}
-                  href={link.href ?? "#"}
+                  type="button"
                   aria-current={active ? "page" : undefined}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    navigate(link.href);
+                  }}
                   className={cn(
-                    "border-b border-neutral-100 py-3 text-body",
+                    "cursor-pointer border-b border-neutral-100 py-3 text-left text-body",
                     active ? "font-bold text-primary-800" : "font-medium text-neutral-700",
                   )}
                 >
                   {link.label}
-                </Link>
+                </button>
               );
             })}
           </nav>

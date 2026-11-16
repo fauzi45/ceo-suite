@@ -1,5 +1,7 @@
-import Link from "next/link";
+"use client";
+
 import { cn } from "@/lib/cn";
+import { useNavigate } from "@/lib/use-navigate";
 import { Container } from "@/components/atoms/Container/Container";
 import { Logo } from "@/components/atoms/Logo/Logo";
 import { EmailCapture } from "@/components/molecules/EmailCapture/EmailCapture";
@@ -35,19 +37,22 @@ export function Footer({
   onSubscribe,
   className,
 }: FooterProps) {
+  const navigate = useNavigate();
+
   return (
     <footer className={cn("flex w-full flex-col items-center gap-16 bg-neutral-50 pb-12 pt-16", className)}>
       <Container className="flex flex-col gap-8">
         <Logo height={32} />
         <nav aria-label="Navigasi footer" className="flex flex-wrap gap-6">
           {links.map((link) => (
-            <Link
+            <button
               key={link.id}
-              href={link.href ?? "#"}
-              className="text-body font-medium leading-[1.2] text-neutral-600 transition-colors hover:text-primary-800"
+              type="button"
+              onClick={() => navigate(link.href)}
+              className="cursor-pointer text-body font-medium leading-[1.2] text-neutral-600 transition-colors hover:text-primary-800"
             >
               {link.label}
-            </Link>
+            </button>
           ))}
         </nav>
       </Container>

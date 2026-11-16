@@ -1,5 +1,7 @@
-import Link from "next/link";
+"use client";
+
 import { cn } from "@/lib/cn";
+import { activateProps, useNavigate } from "@/lib/use-navigate";
 import type { RoomListing } from "@/data/landing";
 import { RoomTypeChip } from "@/components/atoms/Chip/Chip";
 import { Photo } from "@/components/atoms/Photo/Photo";
@@ -11,11 +13,15 @@ export interface RoomCardProps {
 
 /** Kartu ruangan: foto, nama, tipe, kapasitas, harga utama (dengan harga coret opsional) dan harga periode lain. */
 export function RoomCard({ room, className }: RoomCardProps) {
+  const navigate = useNavigate();
+
   return (
     <article
+      {...activateProps(() => navigate(`/product/${room.id}`))}
       className={cn(
-        "relative flex flex-col gap-3 rounded-lg bg-white p-3 shadow-input ring-1 ring-neutral-100",
+        "relative flex flex-col gap-3 rounded-lg bg-white p-3 shadow-input ring-1 ring-neutral-100 outline-none",
         "group cursor-pointer transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-popover",
+        "focus-visible:ring-4 focus-visible:ring-primary-100",
         className,
       )}
     >
@@ -28,15 +34,7 @@ export function RoomCard({ room, className }: RoomCardProps) {
       />
       <div className="flex flex-col gap-2">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="text-body font-bold leading-[1.2] text-neutral-950">
-            {/* Tautan "meregang" ke seluruh kartu supaya kartu bisa diklik tanpa membungkus semuanya. */}
-            <Link
-              href={`/product/${room.id}`}
-              className="outline-none after:absolute after:inset-0 after:rounded-lg focus-visible:after:ring-4 focus-visible:after:ring-primary-100"
-            >
-              {room.name}
-            </Link>
-          </h3>
+          <h3 className="text-body font-bold leading-[1.2] text-neutral-950">{room.name}</h3>
           <span className="shrink-0 text-caption text-neutral-500">{room.people} People</span>
         </div>
         <RoomTypeChip roomType={room.roomType} className="self-start" />

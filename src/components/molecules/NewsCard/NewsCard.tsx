@@ -1,5 +1,7 @@
-import Link from "next/link";
+"use client";
+
 import { cn } from "@/lib/cn";
+import { activateProps, useNavigate } from "@/lib/use-navigate";
 import { formatNewsDate, type NewsPost } from "@/data/news";
 import { Avatar } from "@/components/atoms/Avatar/Avatar";
 import { Photo } from "@/components/atoms/Photo/Photo";
@@ -11,8 +13,13 @@ export interface NewsCardProps {
 
 /** Kartu artikel vertikal: foto lebar, penulis + tanggal, judul, lalu kutipan. Seluruh kartu menuju detail artikel. */
 export function NewsCard({ post, className }: NewsCardProps) {
+  const navigate = useNavigate();
+
   return (
-    <Link href={`/news/${post.id}`} className={cn("group flex flex-col gap-4 outline-none", className)}>
+    <div
+      {...activateProps(() => navigate(`/news/${post.id}`))}
+      className={cn("group flex cursor-pointer flex-col gap-4 outline-none", className)}
+    >
       <Photo
         src={post.image}
         alt=""
@@ -35,6 +42,6 @@ export function NewsCard({ post, className }: NewsCardProps) {
         </h3>
         <p className="line-clamp-3 text-caption text-neutral-500">{post.excerpt}</p>
       </article>
-    </Link>
+    </div>
   );
 }

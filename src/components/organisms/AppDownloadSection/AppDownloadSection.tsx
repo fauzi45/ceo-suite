@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { cn } from "@/lib/cn";
+import { useNavigate } from "@/lib/use-navigate";
 import { Container } from "@/components/atoms/Container/Container";
 
 export interface AppDownloadSectionProps {
@@ -30,14 +33,17 @@ function StoreBadge({
   height: number;
   label: string;
 }) {
+  const navigate = useNavigate();
+
   return (
-    <a
-      href={href}
+    <button
+      type="button"
+      onClick={() => navigate(href)}
       aria-label={label}
-      className="inline-flex rounded-lg outline-none transition-opacity hover:opacity-90 focus-visible:ring-4 focus-visible:ring-neutral-300"
+      className="inline-flex cursor-pointer rounded-lg outline-none transition-opacity hover:opacity-90 focus-visible:ring-4 focus-visible:ring-neutral-300"
     >
       <Image src={src} alt={label} width={width} height={height} unoptimized className="h-12 w-auto md:h-[66px]" />
-    </a>
+    </button>
   );
 }
 

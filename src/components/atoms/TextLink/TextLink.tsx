@@ -1,15 +1,27 @@
-import Link from "next/link";
-import type { ComponentProps } from "react";
+"use client";
+
+import type { ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/cn";
+import { useNavigate } from "@/lib/use-navigate";
 
-export type TextLinkProps = ComponentProps<typeof Link>;
+export interface TextLinkProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type"> {
+  /** Tujuan setelah diklik (`onClick` dijalankan lebih dulu). */
+  href?: string;
+}
 
-/** Link teks kecil berwarna primary (contoh "Forgot Password", "Sign Up Here"). */
-export function TextLink({ className, ...rest }: TextLinkProps) {
+/** Teks kecil berwarna primary yang pindah halaman lewat `onClick` (contoh "Forgot Password", "Sign Up Here"). */
+export function TextLink({ href, onClick, className, ...rest }: TextLinkProps) {
+  const navigate = useNavigate();
+
   return (
-    <Link
+    <button
+      type="button"
+      onClick={(event) => {
+        onClick?.(event);
+        navigate(href);
+      }}
       className={cn(
-        "rounded-sm text-caption font-medium text-primary-800 outline-none transition-colors",
+        "cursor-pointer rounded-sm text-caption font-medium text-primary-800 outline-none transition-colors",
         "hover:text-primary-600 active:text-primary-900 focus-visible:ring-4 focus-visible:ring-primary-100",
         className,
       )}

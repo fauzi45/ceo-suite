@@ -143,6 +143,9 @@ export { PartnersSection, type PartnersSectionProps } from "./organisms/Partners
 export { TrustedBySection, type TrustedBySectionProps } from "./organisms/TrustedBySection/TrustedBySection";
 export { NewsSection, type NewsSectionProps } from "./organisms/NewsSection/NewsSection";
 export { FeatureItem, type FeatureItemProps } from "./molecules/FeatureItem/FeatureItem";
+export { Pagination, type PaginationProps } from "./molecules/Pagination/Pagination";
+export { ContactCtaCard, type ContactCtaCardProps } from "./molecules/ContactCtaCard/ContactCtaCard";
+export { PartnersIntroSection, type PartnersIntroSectionProps } from "./organisms/PartnersIntroSection/PartnersIntroSection";
 export { ServiceCard, type ServiceCardProps } from "./molecules/ServiceCard/ServiceCard";
 export { ServiceIntroSection, type ServiceIntroSectionProps } from "./organisms/ServiceIntroSection/ServiceIntroSection";
 export { ServicesSection, type ServicesSectionProps } from "./organisms/ServicesSection/ServicesSection";
