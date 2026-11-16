@@ -81,6 +81,15 @@ export const ICON_NAMES = [
   "x-twitter",
   "linkedin",
   "youtube",
+  "service-virtual-office",
+  "service-administrative",
+  "service-it-support",
+  "service-accounting",
+  "service-company-registration",
+  "feature-tailored",
+  "feature-team",
+  "feature-time",
+  "feature-cost",
 ] as const;
 
 export type IconName = (typeof ICON_NAMES)[number];

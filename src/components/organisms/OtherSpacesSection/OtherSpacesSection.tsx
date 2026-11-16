@@ -11,11 +11,19 @@ import { SpaceCategoryCard } from "@/components/molecules/SpaceCategoryCard/Spac
 
 export interface OtherSpacesSectionProps {
   spaces?: OtherSpace[];
+  /** Judul section. Default "Other Spaces"; halaman Services memakai "Other Services". */
+  title?: string;
+  description?: string;
   className?: string;
 }
 
 /** "Other Spaces": judul + panah kiri/kanan, lalu baris kartu kategori yang digulir horizontal. */
-export function OtherSpacesSection({ spaces = OTHER_SPACES, className }: OtherSpacesSectionProps) {
+export function OtherSpacesSection({
+  spaces = OTHER_SPACES,
+  title = "Other Spaces",
+  description = "Find the perfect space for your next meeting or event.",
+  className,
+}: OtherSpacesSectionProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [edge, setEdge] = useState({ start: true, end: false });
 
@@ -46,11 +54,9 @@ export function OtherSpacesSection({ spaces = OTHER_SPACES, className }: OtherSp
         <div className="flex items-end justify-between gap-4">
           <div className="flex flex-col gap-2">
             <h2 className="text-heading-md font-bold leading-[1.2] text-neutral-950 md:text-heading-lg">
-              Other Spaces
+              {title}
             </h2>
-            <p className="text-caption text-neutral-500 md:text-body">
-              Find the perfect space for your next meeting or event.
-            </p>
+            <p className="text-caption text-neutral-500 md:text-body">{description}</p>
           </div>
           <div className="flex gap-2">
             <Button

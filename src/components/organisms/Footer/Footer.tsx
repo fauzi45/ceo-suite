@@ -13,7 +13,7 @@ export interface FooterLink {
 export const DEFAULT_FOOTER_LINKS: FooterLink[] = [
   { id: "home", label: "Home", href: "#" },
   { id: "workspaces", label: "Workspaces", href: "#" },
-  { id: "services", label: "Services", href: "#" },
+  { id: "services", label: "Services", href: "/services" },
   { id: "promotions", label: "Promotion & Deals!", href: "/promotions" },
   { id: "news", label: "News", href: "/news" },
 ];
