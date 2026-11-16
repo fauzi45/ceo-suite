@@ -34,7 +34,7 @@ export function CategoryContent({ page }: CategoryContentProps) {
           title={page.intro.title}
           description={page.intro.description}
           features={page.intro.features}
-          className="relative -mt-8 rounded-t-[2rem] bg-white"
+          className="relative -mt-8 rounded-t-[2rem] bg-white md:py-32"
         />
       )}
       <SearchResultsSection
@@ -45,7 +45,7 @@ export function CategoryContent({ page }: CategoryContentProps) {
         roomTypes={page.roomTypes}
         syncUrl={false}
         initialCriteria={{ location: CITY_OPTIONS[0], region: "All", dates: { start: null, end: null }, spaceTypes: [] }}
-        className={page.intro ? undefined : "relative -mt-8 rounded-t-[2rem] bg-white"}
+        className={page.intro ? "md:py-16" : "relative -mt-8 rounded-t-[2rem] bg-white md:py-16"}
       />
       <OtherSpacesSection />
     </LandingLayout>

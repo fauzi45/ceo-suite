@@ -18,19 +18,19 @@ export function MemberCard({ name, code, maskedNumber, className }: MemberCardPr
   return (
     <div
       className={cn(
-        "flex aspect-[1.7/1] w-full max-w-[400px] flex-col overflow-hidden rounded-xl text-white shadow-modal",
+        "flex aspect-[483/264] w-full max-w-[483px] flex-col overflow-hidden rounded-xl text-white shadow-modal",
         "bg-[linear-gradient(135deg,#ff9f45_0%,#f0476a_55%,#c2268e_100%)]",
         className,
       )}
     >
-      <div className="flex flex-1 flex-col justify-between p-4">
-        <span aria-hidden="true" className="size-8 rounded-md border border-white/60 bg-white/25" />
+      <div className="flex flex-1 flex-col justify-between p-5 md:p-6">
+        <span aria-hidden="true" className="size-9 rounded-md border border-white/60 bg-white/25 md:size-11" />
         <div className="flex flex-col items-end gap-1">
-          <span className="text-heading-sm font-bold leading-[1.2] tracking-wide">CEO SUITE</span>
-          <span className="text-tiny tracking-widest">{maskedNumber}</span>
+          <span className="text-heading-sm font-bold leading-[1.2] tracking-wide md:text-heading-md">CEO SUITE</span>
+          <span className="text-caption tracking-widest">{maskedNumber}</span>
         </div>
       </div>
-      <div className="flex items-center justify-between gap-3 bg-neutral-1000/80 px-4 py-3 text-tiny">
+      <div className="flex items-center justify-between gap-3 bg-neutral-1000/80 px-5 py-3 text-caption md:px-6 md:py-4">
         <span>{name}</span>
         <span className="flex items-center gap-2 font-medium">
           {code}
@@ -40,7 +40,7 @@ export function MemberCard({ name, code, maskedNumber, className }: MemberCardPr
             onClick={() => void copy(code)}
             className="inline-flex cursor-pointer rounded outline-none hover:opacity-80 focus-visible:ring-2 focus-visible:ring-white"
           >
-            <Icon name={copied ? "check" : "copy"} size={14} />
+            <Icon name={copied ? "check" : "copy"} size={16} />
           </button>
         </span>
       </div>
