@@ -81,12 +81,14 @@ export interface SpaceCategory {
   label: string;
   icon: IconName;
   image?: string;
+  /** Halaman kategori tujuan. */
+  href: string;
 }
 
 export const SPACE_CATEGORIES: SpaceCategory[] = [
-  { id: "private-offices", label: "Private Offices", icon: "room-office", image: img("space-offices-sq") },
-  { id: "coworking", label: "Coworking Space", icon: "room-coworking", image: img("space-coworking-sq") },
-  { id: "meeting-room", label: "Meeting Room", icon: "room-meeting", image: img("space-meeting-sq") },
+  { id: "private-offices", label: "Private Offices", icon: "room-office", image: img("space-offices-sq"), href: "/category/private-offices" },
+  { id: "coworking", label: "Coworking Space", icon: "room-coworking", image: img("space-coworking-sq"), href: "/category/co-working" },
+  { id: "meeting-room", label: "Meeting Room", icon: "room-meeting", image: img("space-meeting-sq"), href: "/category/meeting-rooms" },
 ];
 
 export interface Stat {

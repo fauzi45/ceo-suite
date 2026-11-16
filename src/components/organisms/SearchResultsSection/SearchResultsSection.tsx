@@ -5,9 +5,10 @@ import { cn } from "@/lib/cn";
 import { CITY_CENTERS, SEARCH_ROOMS, type RoomListing } from "@/data/landing";
 import { buildSearchHref } from "@/lib/search-params";
 import { Button } from "@/components/atoms/Button/Button";
+import type { RoomType } from "@/components/atoms/Chip/Chip";
 import { RoomCard } from "@/components/molecules/RoomCard/RoomCard";
 import { SectionHeader } from "@/components/molecules/SectionHeader/SectionHeader";
-import { OfficeTypeTabs } from "@/components/organisms/OfficeTypeTabs/OfficeTypeTabs";
+import { OFFICE_TYPE_TABS, OfficeTypeTabs } from "@/components/organisms/OfficeTypeTabs/OfficeTypeTabs";
 import { SpaceMap } from "@/components/organisms/SpaceMap/SpaceMap";
 import { SpaceSearchForm, type SearchCriteria } from "@/components/organisms/SpaceSearchForm/SpaceSearchForm";
 
@@ -15,6 +16,19 @@ export interface SearchResultsSectionProps {
   rooms?: RoomListing[];
   /** Kriteria awal (biasanya dibaca dari URL). */
   initialCriteria: SearchCriteria;
+  /** Judul halaman di atas form. Default "Search Results"; `null` = tanpa judul (halaman kategori memakai hero). */
+  heading?: string | null;
+  /** Judul dan subjudul daftar ruang. Default "All Spaces". */
+  listTitle?: string;
+  listSubtitle?: string;
+  /**
+   * Kunci tipe ruang (halaman kategori): hanya tipe ini yang tampil, field "Space Type" disembunyikan, dan
+   * tab Filter hanya berisi tipe tersebut (tanpa tombol Filter bila hanya satu tipe).
+   */
+  roomTypes?: RoomType[];
+  /** Tulis kriteria ke URL `/search?...` setiap field berubah. Matikan untuk halaman selain Search Results. */
+  syncUrl?: boolean;
+  id?: string;
   className?: string;
 }
 
@@ -28,6 +42,12 @@ const PAGE_SIZE = 6;
 export function SearchResultsSection({
   rooms = SEARCH_ROOMS,
   initialCriteria,
+  heading = "Search Results",
+  listTitle = "All Spaces",
+  listSubtitle = "Explore top-rated meeting rooms and workspaces.",
+  roomTypes,
+  syncUrl = true,
+  id,
   className,
 }: SearchResultsSectionProps) {
   const [criteria, setCriteria] = useState(initialCriteria);
@@ -42,18 +62,24 @@ export function SearchResultsSection({
         (room) =>
           room.city === criteria.location &&
           (!criteria.region || criteria.region === "All" || room.region === criteria.region) &&
+          (!roomTypes || roomTypes.includes(room.roomType)) &&
           (criteria.spaceTypes.length === 0 || criteria.spaceTypes.includes(room.roomType)) &&
           (tab === "all" || room.roomType === tab),
       ),
-    [rooms, criteria, tab],
+    [rooms, criteria, tab, roomTypes],
   );
+  const typeTabs = useMemo(
+    () => (roomTypes ? OFFICE_TYPE_TABS.filter((entry) => entry.id === "all" || roomTypes.includes(entry.id as RoomType)) : undefined),
+    [roomTypes],
+  );
+  const canFilterByType = !roomTypes || roomTypes.length > 1;
   const shown = results.slice(0, visible);
 
   const handleCriteria = (next: SearchCriteria) => {
     setCriteria(next);
     setVisible(PAGE_SIZE);
     // Jaga URL tetap bisa dibagikan tanpa memuat ulang halaman.
-    window.history.replaceState(null, "", buildSearchHref(next));
+    if (syncUrl) window.history.replaceState(null, "", buildSearchHref(next));
   };
 
   const selectOnMap = (id: string) => {
@@ -62,27 +88,35 @@ export function SearchResultsSection({
   };
 
   return (
-    <section className={cn("py-8 md:py-12", className)}>
+    <section id={id} className={cn("scroll-mt-4 py-8 md:py-12", className)}>
       <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
         <div className="flex min-w-0 flex-1 flex-col gap-8 px-4 sm:px-8 xl:pl-40">
           <div className="flex flex-col gap-6">
-            <h1 className="text-heading-md font-bold leading-[1.2] text-neutral-950 md:text-heading-lg">
-              Search Results
-            </h1>
-            <SpaceSearchForm variant="inline" defaultCriteria={criteria} onChange={handleCriteria} />
+            {heading && (
+              <h1 className="text-heading-md font-bold leading-[1.2] text-neutral-950 md:text-heading-lg">
+                {heading}
+              </h1>
+            )}
+            <SpaceSearchForm
+              variant="inline"
+              defaultCriteria={criteria}
+              onChange={handleCriteria}
+              hideSpaceType={Boolean(roomTypes)}
+            />
           </div>
 
           <div className="flex flex-col gap-6">
             <SectionHeader
-              title="All Spaces"
-              subtitle="Explore top-rated meeting rooms and workspaces."
-              actionLabel="Filter"
+              title={listTitle}
+              subtitle={listSubtitle}
+              actionLabel={canFilterByType ? "Filter" : undefined}
               actionIcon="filter"
               actionHierarchy="secondary-white"
               onAction={() => setTabsOpen((open) => !open)}
             />
-            {tabsOpen && (
+            {canFilterByType && tabsOpen && (
               <OfficeTypeTabs
+                tabs={typeTabs}
                 value={tab}
                 onChange={(id) => {
                   setTab(id);

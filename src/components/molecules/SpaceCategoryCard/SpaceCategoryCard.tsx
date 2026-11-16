@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/cn";
+import { activateProps, useNavigate } from "@/lib/use-navigate";
 import { Icon, type IconName } from "@/components/atoms/Icon/Icon";
 import { Photo } from "@/components/atoms/Photo/Photo";
 
@@ -8,6 +11,8 @@ export interface SpaceCategoryCardProps {
   image?: string;
   /** Tampilkan penanda panah merah. Default: hanya saat belum ada foto (foto dari Figma sudah memuatnya). */
   showMarker?: boolean;
+  /** Halaman tujuan saat kartu diklik. Tanpa ini kartu tidak berpindah halaman. */
+  href?: string;
   className?: string;
 }
 
@@ -27,9 +32,14 @@ const ICON_COLORS: Partial<Record<IconName, string>> = {
  * Kartu kategori ruang di "Browse Spaces": foto persegi dengan penanda panah merah, label di bawah.
  * Foto dari Figma sudah memuat penanda panah; penanda buatan hanya dipakai untuk placeholder.
  */
-export function SpaceCategoryCard({ label, icon, image, showMarker = !image, className }: SpaceCategoryCardProps) {
+export function SpaceCategoryCard({ label, icon, image, showMarker = !image, href, className }: SpaceCategoryCardProps) {
+  const navigate = useNavigate();
+
   return (
-    <article className={cn("group flex cursor-pointer flex-col gap-3", className)}>
+    <article
+      {...(href ? activateProps(() => navigate(href)) : {})}
+      className={cn("group flex cursor-pointer flex-col gap-3 outline-none", className)}
+    >
       <div className="relative">
         <Photo
           src={image}

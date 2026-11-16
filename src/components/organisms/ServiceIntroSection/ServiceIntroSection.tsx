@@ -6,19 +6,27 @@ import { FeatureItem } from "@/components/molecules/FeatureItem/FeatureItem";
 
 export interface ServiceIntroSectionProps {
   features?: ServiceFeature[];
+  /** Default: teks halaman Services. Halaman kategori mengisinya dengan teks kategori. */
+  title?: string;
+  description?: string;
   className?: string;
 }
 
 /** "Streamline Your Business Operations": teks + logo klien di kiri, grid 2x2 keunggulan di kanan. */
-export function ServiceIntroSection({ features = SERVICE_FEATURES, className }: ServiceIntroSectionProps) {
+export function ServiceIntroSection({
+  features = SERVICE_FEATURES,
+  title = SERVICES_INTRO.title,
+  description = SERVICES_INTRO.description,
+  className,
+}: ServiceIntroSectionProps) {
   return (
     <section className={cn("py-12 md:py-20", className)}>
       <Container className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
         <div className="flex flex-col gap-6">
           <h2 className="text-heading-md font-bold leading-[1.2] text-neutral-950 md:text-heading-lg">
-            {SERVICES_INTRO.title}
+            {title}
           </h2>
-          <p className="text-caption leading-[1.6] text-neutral-500 md:text-body">{SERVICES_INTRO.description}</p>
+          <p className="text-caption leading-[1.6] text-neutral-500 md:text-body">{description}</p>
           <div className="flex flex-col gap-3">
             <p className="text-caption font-medium text-neutral-600">{SERVICES_INTRO.trustedLabel}</p>
             <Image

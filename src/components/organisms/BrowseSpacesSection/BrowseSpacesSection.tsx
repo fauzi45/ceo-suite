@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/cn";
+import { useNavigate } from "@/lib/use-navigate";
 import { SPACE_CATEGORIES } from "@/data/landing";
 import { Container } from "@/components/atoms/Container/Container";
 import { AllSpaceCard } from "@/components/molecules/AllSpaceCard/AllSpaceCard";
@@ -12,6 +15,8 @@ export interface BrowseSpacesSectionProps {
 
 /** "Browse Spaces": 3 kategori ruang + kartu "All Space". 2 kolom di mobile, 4 kolom di desktop. */
 export function BrowseSpacesSection({ onCheckAvailability, className }: BrowseSpacesSectionProps) {
+  const navigate = useNavigate();
+
   return (
     <section className={cn("py-10 md:py-16", className)}>
       <Container className="flex flex-col gap-6 md:gap-8">
@@ -26,9 +31,10 @@ export function BrowseSpacesSection({ onCheckAvailability, className }: BrowseSp
               label={category.label}
               icon={category.icon}
               image={category.image}
+              href={category.href}
             />
           ))}
-          <AllSpaceCard onClick={onCheckAvailability} />
+          <AllSpaceCard onClick={onCheckAvailability ?? (() => navigate("/category/all"))} />
         </div>
       </Container>
     </section>

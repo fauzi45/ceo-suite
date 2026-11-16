@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
+import { categoryHrefForRoomType } from "@/data/categories";
 import { OTHER_SPACES, type OtherSpace } from "@/data/landing";
 import { ROOM_TYPE_ICONS } from "@/components/atoms/Chip/Chip";
 import { Button } from "@/components/atoms/Button/Button";
@@ -92,6 +93,7 @@ export function OtherSpacesSection({
               icon={ROOM_TYPE_ICONS[space.roomType]}
               image={space.image}
               showMarker={space.needsMarker}
+              href={categoryHrefForRoomType(space.roomType)}
               className="w-44 shrink-0 snap-start md:w-56"
             />
           ))}
