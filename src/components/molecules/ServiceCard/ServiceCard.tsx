@@ -5,13 +5,13 @@ import { Photo } from "@/components/atoms/Photo/Photo";
 
 export interface ServiceCardProps {
   service: Service;
-  /** Tujuan tombol. Default: belum mengarah ke mana pun. */
-  href?: string;
+  /** Aksi tombol. Default: belum mengarah ke mana pun. */
+  onClick?: () => void;
   className?: string;
 }
 
 /** Kartu layanan: foto berwarna dengan ikon + judul di atasnya, deskripsi, lalu tombol kecil merah muda. */
-export function ServiceCard({ service, href, className }: ServiceCardProps) {
+export function ServiceCard({ service, onClick, className }: ServiceCardProps) {
   return (
     <article className={cn("group flex flex-col gap-4", className)}>
       <div className="relative">
@@ -28,13 +28,14 @@ export function ServiceCard({ service, href, className }: ServiceCardProps) {
         </h3>
       </div>
       <p className="text-caption leading-[1.5] text-neutral-600 md:text-body">{service.description}</p>
-      <a
-        href={href}
+      <button
+        type="button"
+        onClick={onClick}
         className="mt-auto inline-flex cursor-pointer w-fit items-center gap-1 rounded-md bg-primary-100 px-3 py-2 text-caption font-medium leading-[1.2] text-primary-800 outline-none transition-colors hover:bg-primary-200 focus-visible:ring-4 focus-visible:ring-primary-100"
       >
         {service.cta}
         <Icon name="chevron-right" size={14} />
-      </a>
+      </button>
     </article>
   );
 }

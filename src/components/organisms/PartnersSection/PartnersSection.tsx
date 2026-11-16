@@ -23,7 +23,7 @@ export function PartnersSection({ partners = PARTNERS, onSeeAll, className }: Pa
         />
         <div className="grid gap-6 md:grid-cols-3">
           {partners.map((partner) => (
-            <PartnerCard key={partner.id} partner={partner} />
+            <PartnerCard key={partner.id} partner={partner} href={`/partners/${partner.id}`} />
           ))}
         </div>
       </Container>

@@ -1,5 +1,7 @@
-import Link from "next/link";
+"use client";
+
 import { cn } from "@/lib/cn";
+import { activateProps, useNavigate } from "@/lib/use-navigate";
 import { formatNewsDate, getNewsCategoryLabel, type NewsPost } from "@/data/news";
 import { Avatar } from "@/components/atoms/Avatar/Avatar";
 import { Container } from "@/components/atoms/Container/Container";
@@ -15,10 +17,15 @@ export interface NewsFeaturedSectionProps {
 
 /** Artikel utama (foto besar) di kiri dan daftar artikel ringkas di kanan. */
 export function NewsFeaturedSection({ featured, others = [], className }: NewsFeaturedSectionProps) {
+  const navigate = useNavigate();
+
   return (
     <section className={cn("pb-10 md:pb-16", className)}>
       <Container className="grid gap-8 lg:grid-cols-2 lg:gap-12">
-        <Link href={`/news/${featured.id}`} className="group flex flex-col gap-4 outline-none">
+        <div
+          {...activateProps(() => navigate(`/news/${featured.id}`))}
+          className="group flex cursor-pointer flex-col gap-4 outline-none"
+        >
           <div className="flex items-center gap-2">
             <Avatar name={featured.author} className="size-10" />
             <div className="flex flex-col leading-[1.2]">
@@ -42,7 +49,7 @@ export function NewsFeaturedSection({ featured, others = [], className }: NewsFe
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="aspect-[4/3] w-full rounded-lg"
           />
-        </Link>
+        </div>
 
         <div className="flex flex-col gap-5">
           {others.map((post) => (
