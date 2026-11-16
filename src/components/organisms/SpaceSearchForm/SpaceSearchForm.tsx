@@ -33,6 +33,8 @@ export interface SpaceSearchFormProps {
   onSearch?: (criteria: SearchCriteria) => void;
   /** Dipanggil setiap field berubah. */
   onChange?: (criteria: SearchCriteria) => void;
+  /** Sembunyikan field "Space Type" (varian `inline`; dipakai halaman kategori yang tipenya sudah tertentu). */
+  hideSpaceType?: boolean;
   className?: string;
 }
 
@@ -52,6 +54,7 @@ export function SpaceSearchForm({
   defaultCriteria,
   onSearch,
   onChange,
+  hideSpaceType = false,
   className,
 }: SpaceSearchFormProps) {
   const locationId = useId();
@@ -178,7 +181,9 @@ export function SpaceSearchForm({
         </h2>
       )}
       {isInline
-        ? [locationField, regionField, typeField, dateField]
+        ? hideSpaceType
+          ? [locationField, regionField, dateField]
+          : [locationField, regionField, typeField, dateField]
         : isBar
           ? [locationField, typeField, dateField]
           : [locationField, dateField, typeField]}

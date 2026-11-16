@@ -146,6 +146,7 @@ export { FeatureItem, type FeatureItemProps } from "./molecules/FeatureItem/Feat
 export { Pagination, type PaginationProps } from "./molecules/Pagination/Pagination";
 export { ContactCtaCard, type ContactCtaCardProps } from "./molecules/ContactCtaCard/ContactCtaCard";
 export { PartnersIntroSection, type PartnersIntroSectionProps } from "./organisms/PartnersIntroSection/PartnersIntroSection";
+export { CategoryHero, type CategoryHeroProps } from "./organisms/CategoryHero/CategoryHero";
 export { PackageCard, type PackageCardProps } from "./molecules/PackageCard/PackageCard";
 export { PackageBookingCard, type PackageBookingCardProps } from "./molecules/PackageBookingCard/PackageBookingCard";
 export { PackagePriceCard, type PackagePriceCardProps } from "./molecules/PackagePriceCard/PackagePriceCard";
