@@ -25,6 +25,8 @@ export function useSiteNavbar(activeId = "workspaces"): { navbarProps: NavbarPro
       onSignIn: () => router.push("/login"),
       onSignUp: () => router.push("/sign-up"),
       onUserMenuSelect: (value) => {
+        if (value === "profile") router.push("/profile");
+        if (value === "my-booking") router.push("/my-booking");
         if (value === "logout") logout();
       },
     },

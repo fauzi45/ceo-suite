@@ -199,9 +199,6 @@ export function computePackageTotals(item: MeetingPackage, voucher: Voucher | nu
 export const buildPackageBookingHref = (id: string, date: Date) =>
   `/package/${id}/booking?date=${toDateParam(date)}`;
 
-/** Alamat detail booking (My Booking); tanggal mulai dibawa lewat query URL. */
-export const buildMyBookingHref = (id: string, date: Date) => `/my-booking/${id}?date=${toDateParam(date)}`;
-
 /** Langkah di kartu "How to Use This Package". */
 export const PACKAGE_HOW_TO_USE = [
   "Download the CEO SUITE App on App Store or Play Store.",

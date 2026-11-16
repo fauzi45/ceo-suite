@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { notFound } from "next/navigation";
-import { PACKAGES, getPackageById } from "@/data/packages";
+import { SAMPLE_BOOKINGS } from "@/data/my-bookings";
 import { MyBookingContent } from "./MyBookingContent";
 
 type PageProps = { params: Promise<{ id: string }> };
 
+// Hanya booking contoh yang di-prerender; booking buatan pengguna (disimpan di browser) dirender saat diminta.
 export function generateStaticParams() {
-  return PACKAGES.map((item) => ({ id: item.id }));
+  return SAMPLE_BOOKINGS.map((booking) => ({ id: booking.id }));
 }
 
 export const metadata: Metadata = { title: "Booking Details | CEO SUITE" };
@@ -23,13 +23,5 @@ export default function MyBookingPage({ params }: PageProps) {
 
 async function MyBooking({ params }: PageProps) {
   const { id } = await params;
-  const item = getPackageById(id);
-  if (!item) notFound();
-
-  // Tanggal mulai ada di query URL (dibaca di client), jadi isinya perlu Suspense saat prerender.
-  return (
-    <Suspense>
-      <MyBookingContent item={item} />
-    </Suspense>
-  );
+  return <MyBookingContent id={id} />;
 }
