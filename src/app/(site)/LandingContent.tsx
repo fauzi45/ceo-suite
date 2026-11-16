@@ -47,7 +47,7 @@ export function LandingContent() {
           <StatsSection />
           <PromotionsSection onSeeAll={() => router.push("/promotions")} />
           <BestDealsSection onSeeAll={() => router.push("/promotions?category=best-deals")} />
-          <MeetingPackageSection />
+          <MeetingPackageSection onBrowse={() => router.push("/package")} />
           <PartnersSection onSeeAll={() => router.push("/partners")} />
           <TrustedBySection />
           <NewsSection onSeeAll={() => router.push("/news")} />
