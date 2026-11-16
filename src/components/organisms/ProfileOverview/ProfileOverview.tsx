@@ -25,13 +25,13 @@ export function ProfileOverview({ className }: ProfileOverviewProps) {
     <>
       <section
         className={cn(
-          "grid items-center gap-8 rounded-xl bg-primary-800 p-6 text-white md:p-12 lg:grid-cols-[1fr_483px] lg:p-20",
+          "grid items-center gap-8 rounded-xl bg-primary-800 p-6 text-white md:p-10 2xl:grid-cols-[1fr_483px] 2xl:p-20",
           className,
         )}
       >
         <div className="flex flex-col gap-8">
           <div className="flex items-center gap-5">
-            <Avatar name={profile.name} className="size-20 bg-primary-600 text-heading-sm md:size-[120px] md:text-display-sm" />
+            <Avatar name={profile.name} className="size-20 bg-primary-600 text-heading-sm md:size-24 md:text-heading-lg 2xl:size-[120px] 2xl:text-display-sm" />
             <div className="flex min-w-0 flex-col gap-1">
               <span className="text-heading-sm font-bold leading-[1.2] md:text-heading-md">{PROFILE_DISPLAY_NAME}</span>
               <span className="truncate text-caption md:text-body">{profile.email}</span>
@@ -51,7 +51,7 @@ export function ProfileOverview({ className }: ProfileOverviewProps) {
           name={PROFILE_DISPLAY_NAME.replace(" K", "")}
           code={MEMBER_CARD.code}
           maskedNumber={MEMBER_CARD.maskedNumber}
-          className="max-w-[483px] lg:justify-self-end"
+          className="max-w-[483px] 2xl:justify-self-end"
         />
       </section>
 
